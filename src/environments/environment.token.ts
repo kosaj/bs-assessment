@@ -1,4 +1,5 @@
-import { InjectionToken } from "@angular/core";
+import { InjectionToken, Provider } from "@angular/core";
+import { environment } from "./environment";
 
 export interface Configuration {
   apiUrl: string;
@@ -9,6 +10,11 @@ export interface Environment {
   configuration: Configuration;
 }
 
-export const environmentToken = new InjectionToken<Environment>(
+export const EnvironmentToken = new InjectionToken<Environment>(
   "environmentToken"
 );
+
+export const EnvironmentTokenProvider: Provider = {
+  provide: EnvironmentToken,
+  useValue: Object.freeze(environment),
+};
