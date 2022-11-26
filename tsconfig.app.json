@@ -4,7 +4,7 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "paths": {
-      "@client-app/pages/*": ["src/app/pages"]
+      "@client-app/pages/*": ["src/app/pages/*"]
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
