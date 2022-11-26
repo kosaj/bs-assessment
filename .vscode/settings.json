@@ -1,4 +1,8 @@
 {
   "editor.formatOnSave": true,
-  "omnisharp.organizeImportsOnFormat": false
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  }
 }
