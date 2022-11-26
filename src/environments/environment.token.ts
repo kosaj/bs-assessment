@@ -11,7 +11,7 @@ export interface Environment {
 }
 
 export const EnvironmentToken = new InjectionToken<Environment>(
-  "environmentToken"
+  "EnvironmentToken"
 );
 
 export const EnvironmentTokenProvider: Provider = {
