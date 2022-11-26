@@ -1,5 +1,5 @@
 import { InjectionToken, Provider } from "@angular/core";
-import { environment } from "./environment";
+import { environment } from "../../environments/environment";
 
 export interface Configuration {
   apiUrl: string;

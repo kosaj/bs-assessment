@@ -22,7 +22,8 @@
     "paths": {
       "@app/pages/*": ["src/app/pages/*"],
       "@app/routes/*": ["src/app/routes/*"],
-      "@app/components/*": ["src/app/components/*"]
+      "@app/components/*": ["src/app/components/*"],
+      "@app/tokens/*": ["src/app/tokens/*"]
     }
   },
   "angularCompilerOptions": {

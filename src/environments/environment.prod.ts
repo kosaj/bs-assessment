@@ -1,4 +1,4 @@
-import { Environment } from "./environment.token";
+import { Environment } from "@app/tokens/environment.token";
 
 export const environment: Environment = {
   production: true,

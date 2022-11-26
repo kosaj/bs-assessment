@@ -1,5 +1,5 @@
+import { Environment } from "@app/tokens/environment.token";
 import "zone.js/plugins/zone-error";
-import { Environment } from "./environment.token";
 
 export const environment: Environment = {
   production: false,

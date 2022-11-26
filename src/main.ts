@@ -3,8 +3,8 @@ import { bootstrapApplication } from "@angular/platform-browser";
 import { provideRouter, withDebugTracing } from "@angular/router";
 import { APP_ROUTES } from "@app/routes/app-routing";
 import { AppComponent } from "./app/app.component";
+import { EnvironmentTokenProvider } from "./app/tokens/environment.token";
 import { environment } from "./environments/environment";
-import { EnvironmentTokenProvider } from "./environments/environment.token";
 
 if (environment.production) {
   enableProdMode();
