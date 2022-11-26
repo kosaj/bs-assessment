@@ -1,7 +1,7 @@
 import { InjectionToken } from "@angular/core";
 
 export interface Configuration {
-  api: string;
+  apiUrl: string;
 }
 
 export interface Environment {
