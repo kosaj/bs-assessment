@@ -15,7 +15,9 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(HttpClientModule),
-    provideRouter(APP_ROUTES, withDebugTracing()),
+    environment.production
+      ? provideRouter(APP_ROUTES)
+      : provideRouter(APP_ROUTES, withDebugTracing()),
     EnvironmentTokenProvider,
     GeoipTokenProvider,
   ],
