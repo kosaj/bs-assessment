@@ -11,7 +11,6 @@ import { Environment, EnvironmentToken } from "@app/tokens/environment.token";
 import {
   BehaviorSubject,
   defer,
-  filter,
   map,
   Observable,
   of,
@@ -46,14 +45,24 @@ interface Continent {
   name: string;
 }
 
-export const GeoipAppInitializerProvider: Provider = {
+function getGeoipDataFactory(injector: Injector) {
+  return () => {
+    console.log(
+      injector
+        .get(GeoipDataService)
+        .initialized$.pipe(tap((v) => console.log(v)))
+        .subscribe()
+    );
+
+    return of(true);
+  };
+}
+
+export const GetGeoipProvider: Provider = {
   provide: APP_INITIALIZER,
+  useFactory: getGeoipDataFactory,
   deps: [Injector],
   multi: true,
-  useFactory: (injector: Injector) =>
-    injector
-      .get(GeoipDataService)
-      .initialized$.pipe(filter((result) => result)),
 };
 
 const DEFAULT_GEOIP_DATA: GeoipData = {
@@ -96,7 +105,9 @@ export class GeoipDataService implements OnDestroy {
       )
     );
   });
-  initialized$: Observable<boolean> = this._initializedSource.asObservable();
+
+  readonly initialized$: Observable<boolean> =
+    this._initializedSource.asObservable();
 
   get value(): GeoipData | undefined {
     return this._value;

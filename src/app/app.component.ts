@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { GeoipDataService } from "@app/services/geoip-data.service";
 
 @Component({
   selector: "app-root",
@@ -10,7 +9,7 @@ import { GeoipDataService } from "@app/services/geoip-data.service";
   styles: [],
 })
 export class AppComponent {
-  constructor(private _geoipService: GeoipDataService) {
-    console.log(_geoipService.value);
-  }
+  // constructor(private _geoipService: GeoipDataService) {
+  //   console.log(_geoipService.value);
+  // }
 }
