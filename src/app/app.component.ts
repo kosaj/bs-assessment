@@ -8,8 +8,4 @@ import { RouterOutlet } from "@angular/router";
   template: ` <router-outlet></router-outlet> `,
   styles: [],
 })
-export class AppComponent {
-  // constructor(private _geoipService: GeoipDataService) {
-  //   console.log(_geoipService.value);
-  // }
-}
+export class AppComponent {}
