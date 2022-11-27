@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { BackendService } from "@app/services/backend.service";
+import { merge, tap } from "rxjs";
 
 @Component({
   selector: "app-dashboard",
@@ -10,6 +11,12 @@ import { BackendService } from "@app/services/backend.service";
   styleUrls: ["./dashboard.component.scss"],
   providers: [BackendService],
 })
-export class DashboardComponent {
-  constructor(private readonly backendService: BackendService) {}
+export class DashboardComponent implements OnInit {
+  constructor(private readonly _backendService: BackendService) {}
+
+  ngOnInit(): void {
+    merge([this._backendService.getBet(5)])
+      .pipe(tap((result) => console.log(result)))
+      .subscribe();
+  }
 }
