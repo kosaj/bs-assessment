@@ -11,6 +11,6 @@ import { GeoipDataService } from "./services/geoip-data.service";
 })
 export class AppComponent {
   constructor(private readonly _geoipDataService: GeoipDataService) {
-    console.log(_geoipDataService.value);
+    console.log("GeoipDataService", _geoipDataService.value);
   }
 }
