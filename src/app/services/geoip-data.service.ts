@@ -108,28 +108,12 @@ export class GeoipDataService implements OnDestroy {
     private readonly _httpClient: HttpClient,
     @Inject(EnvironmentToken)
     private readonly _environment: Environment
-  ) {
-    // this.testSource.next(true);
-    // this.getGeoipData();
-  }
+  ) {}
 
   ngOnDestroy(): void {
     this._destroyed.next();
     this._destroyed.complete();
   }
-
-  // initialize(): Observable<GeoipData> = defer(() => ) {
-  //   return (
-  //     this._environment.production ? this._geoipData$ : of(DEFAULT_GEOIP_DATA)
-  //   ).pipe(
-  //     takeUntil(this._destroyed),
-  //     tap((geoipData: GeoipData) => {
-  //       this._value = Object.freeze(geoipData);
-  //       this._initializedSource.next(true);
-  //     }),
-  //     shareReplay()
-  //   );
-  // }
 }
 
 export const GetGeoipProvider: Provider = {
