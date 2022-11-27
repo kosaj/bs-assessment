@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
+import { BackendService } from "@app/services/backend.service";
 
 @Component({
   selector: "app-dashboard",
@@ -7,5 +8,8 @@ import { Component } from "@angular/core";
   imports: [CommonModule],
   template: ` <p>dashboard works!</p> `,
   styleUrls: ["./dashboard.component.scss"],
+  providers: [BackendService],
 })
-export class DashboardComponent {}
+export class DashboardComponent {
+  constructor(private readonly backendService: BackendService) {}
+}
