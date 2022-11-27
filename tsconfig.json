@@ -23,7 +23,8 @@
       "@app/routes/*": ["src/app/routes/*"],
       "@app/components/*": ["src/app/components/*"],
       "@app/tokens/*": ["src/app/tokens/*"],
-      "@app/services/*": ["src/app/services/*"]
+      "@app/services/*": ["src/app/services/*"],
+      "@app/models/*": ["src/app/models/*"]
     }
   },
   "angularCompilerOptions": {

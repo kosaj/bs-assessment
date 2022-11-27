@@ -6,7 +6,8 @@ import {
   OnDestroy,
   Provider,
 } from "@angular/core";
-import { Environment, EnvironmentToken } from "@app/tokens/environment.token";
+import { Environment } from "@app/models/environment.interface";
+import { EnvironmentToken } from "@app/tokens/environment.token";
 import {
   catchError,
   defer,
