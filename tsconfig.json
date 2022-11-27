@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -23,7 +22,8 @@
       "@app/pages/*": ["src/app/pages/*"],
       "@app/routes/*": ["src/app/routes/*"],
       "@app/components/*": ["src/app/components/*"],
-      "@app/tokens/*": ["src/app/tokens/*"]
+      "@app/tokens/*": ["src/app/tokens/*"],
+      "@app/services/*": ["src/app/services/*"]
     }
   },
   "angularCompilerOptions": {
