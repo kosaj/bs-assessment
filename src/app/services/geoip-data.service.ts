@@ -3,7 +3,6 @@ import {
   APP_INITIALIZER,
   Inject,
   Injectable,
-  Injector,
   OnDestroy,
   Provider,
 } from "@angular/core";
@@ -46,31 +45,9 @@ interface Continent {
   name: string;
 }
 
-function getGeoipDataFactory(injector: Injector) {
-  return () => {
-    injector
-      .get(GeoipDataService)
-      .initialized$.pipe(tap((v) => console.log("tap", v)))
-      .subscribe();
-
-    return of(true);
-  };
+function getGeoipDataFactory(geoipDataService: GeoipDataService) {
+  return () => geoipDataService.initialized$;
 }
-
-export const GetGeoipProvider: Provider = {
-  provide: APP_INITIALIZER,
-  useFactory: getGeoipDataFactory,
-  deps: [Injector],
-  multi: true,
-};
-
-const DEFAULT_GEOIP_DATA: GeoipData = {
-  currency: { code: "PLN", symbol: "PLN", symbolNative: "zł" },
-  location: {
-    continent: { code: "EU", name: "Europe" },
-    country: { code: "PL", inEU: true, name: "Poland" },
-  },
-};
 
 @Injectable({
   providedIn: "root",
@@ -140,3 +117,18 @@ export class GeoipDataService implements OnDestroy {
       .subscribe();
   }
 }
+
+export const GetGeoipProvider: Provider = {
+  provide: APP_INITIALIZER,
+  useFactory: getGeoipDataFactory,
+  deps: [GeoipDataService],
+  multi: true,
+};
+
+const DEFAULT_GEOIP_DATA: GeoipData = {
+  currency: { code: "PLN", symbol: "PLN", symbolNative: "zł" },
+  location: {
+    continent: { code: "EU", name: "Europe" },
+    country: { code: "PL", inEU: true, name: "Poland" },
+  },
+};
