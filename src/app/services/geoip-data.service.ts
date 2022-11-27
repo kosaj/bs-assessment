@@ -74,7 +74,7 @@ export class GeoipDataService implements OnDestroy {
 
   private readonly _geoipData$: Observable<GeoipData> = defer(() => {
     const { apiUrl, apiKey } = this._environment.configuration.geoipConfig;
-    return this._httpClient.get(`${apiUrl}?key=${apiKey}`).pipe(
+    return this._httpClient.get(`${apiUrl}/?key=${apiKey}`).pipe(
       map(
         (result: any) =>
           <GeoipData>{
