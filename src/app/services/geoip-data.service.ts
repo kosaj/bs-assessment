@@ -8,12 +8,12 @@ import {
 } from "@angular/core";
 import { Environment, EnvironmentToken } from "@app/tokens/environment.token";
 import {
-  BehaviorSubject,
+  catchError,
   defer,
-  filter,
   map,
   Observable,
   of,
+  shareReplay,
   Subject,
   takeUntil,
   tap,
@@ -46,7 +46,7 @@ interface Continent {
 }
 
 function getGeoipDataFactory(geoipDataService: GeoipDataService) {
-  return () => geoipDataService.initialized$;
+  return () => geoipDataService.initialize$;
 }
 
 @Injectable({
@@ -54,10 +54,22 @@ function getGeoipDataFactory(geoipDataService: GeoipDataService) {
 })
 export class GeoipDataService implements OnDestroy {
   private readonly _destroyed = new Subject<void>();
-  private readonly _initializedSource = new BehaviorSubject<boolean>(false);
-  readonly initialized$: Observable<boolean> = this._initializedSource
-    .asObservable()
-    .pipe(filter((value) => value));
+
+  readonly initialize$ = defer(() => {
+    return (
+      this._environment.production ? this._geoipData$ : of(DEFAULT_GEOIP_DATA)
+    ).pipe(
+      takeUntil(this._destroyed),
+      tap((geoipData: GeoipData) => {
+        this._value = Object.freeze(geoipData);
+      }),
+      catchError((error) => {
+        console.error(error);
+        return of(undefined);
+      }),
+      shareReplay()
+    );
+  });
 
   private readonly _geoipData$: Observable<GeoipData> = defer(() => {
     const { apiUrl, apiKey } = this._environment.configuration.geoipConfig;
@@ -97,7 +109,8 @@ export class GeoipDataService implements OnDestroy {
     @Inject(EnvironmentToken)
     private readonly _environment: Environment
   ) {
-    this.getGeoipData();
+    // this.testSource.next(true);
+    // this.getGeoipData();
   }
 
   ngOnDestroy(): void {
@@ -105,17 +118,18 @@ export class GeoipDataService implements OnDestroy {
     this._destroyed.complete();
   }
 
-  private getGeoipData(): void {
-    (this._environment.production ? this._geoipData$ : of(DEFAULT_GEOIP_DATA))
-      .pipe(
-        takeUntil(this._destroyed),
-        tap((geoipData: GeoipData) => {
-          this._value = Object.freeze(geoipData);
-          this._initializedSource.next(true);
-        })
-      )
-      .subscribe();
-  }
+  // initialize(): Observable<GeoipData> = defer(() => ) {
+  //   return (
+  //     this._environment.production ? this._geoipData$ : of(DEFAULT_GEOIP_DATA)
+  //   ).pipe(
+  //     takeUntil(this._destroyed),
+  //     tap((geoipData: GeoipData) => {
+  //       this._value = Object.freeze(geoipData);
+  //       this._initializedSource.next(true);
+  //     }),
+  //     shareReplay()
+  //   );
+  // }
 }
 
 export const GetGeoipProvider: Provider = {
