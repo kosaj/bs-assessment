@@ -19,6 +19,12 @@ enum WebsocketEvent {
 }
 
 export type SocketStatus = "connected" | "disconnected";
+export type DisconnectReason =
+  | "io server disconnect"
+  | "io client disconnect"
+  | "ping timeout"
+  | "transport close"
+  | "transport error";
 
 export function isNonNull<T>(value: T): value is NonNullable<T> {
   return value != null;
@@ -67,11 +73,11 @@ export class WebsocketService implements OnDestroy {
       )
       .subscribe();
 
-    this._getObservable<any>(WebsocketEvent.Disconnect)
+    this._getObservable<DisconnectReason>(WebsocketEvent.Disconnect)
       .pipe(
         takeUntil(this._destroyed),
-        tap((reason: any) => {
-          console.error(reason);
+        tap((reason: DisconnectReason) => {
+          console.error("Disconnection reason:", reason);
           this._connectedSource.next("disconnected");
         })
       )
