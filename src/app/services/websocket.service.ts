@@ -1,4 +1,4 @@
-import { EventEmitter, Inject, Injectable, OnDestroy } from "@angular/core";
+import { Inject, Injectable, OnDestroy } from "@angular/core";
 import { Bet } from "@app/models/bet.interface";
 import { Environment } from "@app/models/environment.interface";
 import { EnvironmentToken } from "@app/tokens/environment.token";
@@ -37,9 +37,10 @@ export class WebsocketService implements OnDestroy {
   private readonly _destroyed = new Subject<void>();
   private readonly _clientSocket: SocketIOClient.Socket;
 
-  readonly onBetUpdated: EventEmitter<Array<Bet>> = new EventEmitter<
-    Array<Bet>
-  >();
+  private readonly _betUpdatedSource: BehaviorSubject<Array<Bet>> =
+    new BehaviorSubject<Array<Bet>>([]);
+  readonly betUpdated$: Observable<Array<Bet>> =
+    this._betUpdatedSource.asObservable();
 
   private readonly _connectedSource: BehaviorSubject<SocketStatus | null> =
     new BehaviorSubject<SocketStatus | null>(null);
@@ -60,7 +61,8 @@ export class WebsocketService implements OnDestroy {
   ngOnDestroy(): void {
     this._destroyed.next();
     this._destroyed.complete();
-    this.onBetUpdated.complete();
+    this._betUpdatedSource.complete();
+    this._connectedSource.complete();
   }
 
   private _setupObservers(): void {
@@ -79,6 +81,11 @@ export class WebsocketService implements OnDestroy {
         tap((reason: DisconnectReason) => {
           console.error("Disconnection reason:", reason);
           this._connectedSource.next("disconnected");
+
+          if (reason === "io client disconnect") {
+            //NOTE: the disconnection was initiated by the server, you need to reconnect manually
+            this._clientSocket.connect();
+          }
         })
       )
       .subscribe();
@@ -86,7 +93,7 @@ export class WebsocketService implements OnDestroy {
     this._getObservable<Array<Bet>>(WebsocketEvent.BetUpdated)
       .pipe(
         takeUntil(this._destroyed),
-        tap((bets: Array<Bet>) => this.onBetUpdated.next(bets))
+        tap((bets: Array<Bet>) => this._betUpdatedSource.next(bets))
       )
       .subscribe();
   }
