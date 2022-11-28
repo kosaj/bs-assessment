@@ -7,7 +7,19 @@ import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
   selector: "app-dashboard",
   standalone: true,
   imports: [CommonModule],
-  template: ` <p>dashboard works!</p> `,
+  template: `
+    <p>dashboard works!</p>
+    <section
+      style="display: inline-flex; border: 1px black solid; padding: 1rem;"
+    >
+      <button (click)="beginPooling()" style="height: 40px; min-width: 64px">
+        Start
+      </button>
+      <button (click)="endPooling()" style="height: 40px; min-width: 64px">
+        Stop
+      </button>
+    </section>
+  `,
   styleUrls: ["./dashboard.component.scss"],
   providers: [BackendService],
 })
@@ -17,11 +29,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private readonly _backendService: BackendService) {}
 
   ngOnInit(): void {
-    this._backendService
-      .startPulling(2)
-      .pipe(take(1), takeUntil(this._destroyed))
-      .subscribe();
-
     forkJoin([
       this._backendService.generateBets(10),
       this._backendService.getBets(),
@@ -38,11 +45,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  ngOnDestroy(): void {
+  beginPooling(): void {
+    console.log("hello");
+
+    this._backendService
+      .startPulling(2)
+      .pipe(take(1), takeUntil(this._destroyed))
+      .subscribe();
+  }
+
+  endPooling(): void {
     this._backendService
       .stopPulling()
       .pipe(take(1), takeUntil(this._destroyed))
       .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.endPooling();
 
     this._destroyed.next();
     this._destroyed.complete();

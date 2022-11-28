@@ -12,7 +12,7 @@ export class BackendService {
   private readonly _apiUrl =
     this._environment.configuration.backendConfig.apiUrl;
 
-  private readonly manager = new Manager(this._apiUrl);
+  private readonly manager = new Manager(this._apiUrl, { autoConnect: false });
 
   constructor(
     @Inject(EnvironmentToken)
