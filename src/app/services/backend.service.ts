@@ -4,18 +4,12 @@ import { Bet } from "@app/models/bet.interface";
 import { Environment } from "@app/models/environment.interface";
 import { EnvironmentToken } from "@app/tokens/environment.token";
 import { map, Observable } from "rxjs";
-import { io } from "socket.io-client";
 
 @Injectable()
 //NOTE: we provide this service in dashboard.component.ts
 export class BackendService {
   private readonly _apiUrl =
     this._environment.configuration.backendConfig.apiUrl;
-
-  get socket(): any {
-    return this._socket;
-  }
-  private readonly _socket = io(`http://localhost:3000`);
 
   constructor(
     @Inject(EnvironmentToken)
