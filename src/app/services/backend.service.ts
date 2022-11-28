@@ -5,9 +5,8 @@ import { EnvironmentToken } from "@app/tokens/environment.token";
 import { Observable } from "rxjs";
 import { Manager } from "socket.io-client";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
+//NOTE: we provide this service in dashboard.component.ts
 export class BackendService {
   private readonly _apiUrl =
     this._environment.configuration.backendConfig.apiUrl;
