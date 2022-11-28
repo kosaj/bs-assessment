@@ -1,7 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Bet } from "@app/models/bet.interface";
 import { BackendService } from "@app/services/backend.service";
-import { WebsocketService } from "@app/services/websocket.service";
+import {
+  SocketStatus,
+  WebsocketService,
+} from "@app/services/websocket.service";
 import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
 
 @Component({
@@ -26,7 +30,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._websocketService.connected$
       .pipe(takeUntil(this._destroyed))
-      .subscribe((status) => console.log(status));
+      .subscribe((status: SocketStatus) => console.log(status));
+
+    this._websocketService.betUpdated$
+      .pipe(takeUntil(this._destroyed))
+      .subscribe((bets: Array<Bet>) => console.log(bets));
 
     forkJoin([
       this._backendService.generateBets(10),
