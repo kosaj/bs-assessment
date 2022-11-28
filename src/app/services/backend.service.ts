@@ -22,7 +22,7 @@ export class BackendService {
 
   /**
    * returns an array of `bet`.
-   * @returns
+   * @returns {Observable<Array<Bet>>}
    */
   getBets(): Observable<Array<Bet>> {
     return this._httpClient.get<Array<Bet>>(`${this._apiUrl}/bets`);
@@ -30,8 +30,8 @@ export class BackendService {
 
   /**
    * returns the `bet` object for the given id
-   * @param id
-   * @returns
+   * @param {number} id
+   * @returns {Observable<Bet>}
    */
   getBet(id: number): Observable<Bet> {
     return this._httpClient.get<Bet>(`${this._apiUrl}/bets/${id}`);
@@ -39,8 +39,8 @@ export class BackendService {
 
   /**
    * generates random bets for the given size
-   * @param size
-   * @returns
+   * @param {number} size
+   * @returns {Observable<Array<Bet>>}
    */
   generateBets(size: number): Observable<Array<Bet>> {
     return this._httpClient
@@ -50,8 +50,8 @@ export class BackendService {
 
   /**
    * starts the websocket pulling
-   * @param rate
-   * @returns
+   * @param {number} rate - rate is in request by second
+   * @returns {Observable<void>}
    */
   startPulling(rate: number): Observable<void> {
     return this._httpClient.get<void>(
@@ -61,6 +61,7 @@ export class BackendService {
 
   /**
    * Stop websocket pulling
+   * @returns {Observable<void>}
    */
   stopPulling(): Observable<void> {
     return this._httpClient.get<void>(`${this._apiUrl}/pulling/stop`);
