@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe();
 
     this._backendService.socket.connect();
-    this._backendService.socket.on("bet-updated", (message: Array<Bet>) => {
+    this._backendService.socket.on("bet-updated", (...message: Array<Bet>) => {
       console.log("bet-updated", message);
     });
   }
