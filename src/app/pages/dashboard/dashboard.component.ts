@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Bet } from "@app/models/bet.interface";
 import { BackendService } from "@app/services/backend.service";
 import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
 
@@ -43,6 +44,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+
+    this._backendService.socket.connect();
+    this._backendService.socket.on("bet-updated", (message: Array<Bet>) => {
+      console.log("bet-updated", message);
+    });
   }
 
   beginPooling(): void {
