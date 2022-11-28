@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   beginPooling(): void {
     this._backendService
-      .startPulling(30)
+      .startPulling(0.25)
       .pipe(take(1), takeUntil(this._destroyed))
       .subscribe();
   }
