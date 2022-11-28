@@ -19,6 +19,9 @@ import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
       <button (click)="endPooling()" style="height: 40px; min-width: 64px">
         Stop
       </button>
+      <button (click)="connect()" style="height: 40px; min-width: 64px">
+        Connect
+      </button>
     </section>
   `,
   styleUrls: ["./dashboard.component.scss"],
@@ -44,11 +47,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+  }
 
+  connect(): void {
     this._backendService.socket.connect();
-    this._backendService.socket.on("bet-updated", (...message: Array<Bet>) => {
-      console.log("bet-updated", message);
+
+    this._backendService.socket.on("connect", () => {
+      console.log("connect");
     });
+
+    this._backendService.socket.on("disconnect", (reason: any) => {
+      console.log("disconnect", reason);
+    });
+
+    if (this._backendService.socket.connected) {
+      this._backendService.socket.on(
+        "bet-updated",
+        (...message: Array<Bet>) => {
+          console.log("bet-updated", message);
+        }
+      );
+    }
   }
 
   beginPooling(): void {
