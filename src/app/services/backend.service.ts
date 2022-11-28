@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
+import { Bet } from "@app/models/bet.interface";
 import { Environment } from "@app/models/environment.interface";
 import { EnvironmentToken } from "@app/tokens/environment.token";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Manager } from "socket.io-client";
 
 @Injectable()
@@ -23,8 +24,8 @@ export class BackendService {
    * returns an array of `bet`.
    * @returns
    */
-  getBets(): Observable<Array<any>> {
-    return this._httpClient.get<Array<any>>(`${this._apiUrl}/bets`);
+  getBets(): Observable<Array<Bet>> {
+    return this._httpClient.get<Array<Bet>>(`${this._apiUrl}/bets`);
   }
 
   /**
@@ -32,8 +33,8 @@ export class BackendService {
    * @param id
    * @returns
    */
-  getBet(id: number): Observable<any> {
-    return this._httpClient.get<any>(`${this._apiUrl}/bets/${id}`);
+  getBet(id: number): Observable<Bet> {
+    return this._httpClient.get<Bet>(`${this._apiUrl}/bets/${id}`);
   }
 
   /**
@@ -41,10 +42,10 @@ export class BackendService {
    * @param size
    * @returns
    */
-  generateBets(size: number): Observable<any> {
-    return this._httpClient.get<any>(
-      `${this._apiUrl}/bets-generate?size=${size}`
-    );
+  generateBets(size: number): Observable<Array<Bet>> {
+    return this._httpClient
+      .get(`${this._apiUrl}/bets-generate?size=${size}`)
+      .pipe(map((result: any) => result.bets));
   }
 
   /**
@@ -52,14 +53,16 @@ export class BackendService {
    * @param rate
    * @returns
    */
-  startPulling(rate: number): Observable<any> {
-    return this._httpClient.get(`${this._apiUrl}/pulling/start?rate=${rate}`);
+  startPulling(rate: number): Observable<void> {
+    return this._httpClient.get<void>(
+      `${this._apiUrl}/pulling/start?rate=${rate}`
+    );
   }
 
   /**
    * Stop websocket pulling
    */
-  stopPulling(): Observable<any> {
-    return this._httpClient.get(`${this._apiUrl}/pulling/stop`);
+  stopPulling(): Observable<void> {
+    return this._httpClient.get<void>(`${this._apiUrl}/pulling/stop`);
   }
 }
