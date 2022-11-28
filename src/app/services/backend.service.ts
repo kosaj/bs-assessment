@@ -19,7 +19,10 @@ export class BackendService {
     private readonly _environment: Environment,
     private readonly _httpClient: HttpClient
   ) {
-    io(this._apiUrl).on("bet-updated", (message: Array<Bet>) => {
+    const socket = io(`http://localhost:3000`);
+    console.log(socket);
+
+    socket.on("bet-updated", (message: Array<Bet>) => {
       console.log("bet-updated", message);
     });
   }
