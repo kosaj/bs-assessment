@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { BackendService } from "@app/services/backend.service";
-import { forkJoin, Subject, takeUntil, tap } from "rxjs";
+import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
 
 @Component({
   selector: "app-dashboard",
@@ -17,6 +17,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private readonly _backendService: BackendService) {}
 
   ngOnInit(): void {
+    this._backendService
+      .startPulling(2)
+      .pipe(take(1), takeUntil(this._destroyed))
+      .subscribe();
+
     forkJoin([
       this._backendService.generateBets(10),
       this._backendService.getBets(),
@@ -34,6 +39,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this._backendService
+      .stopPulling()
+      .pipe(take(1), takeUntil(this._destroyed))
+      .subscribe();
+
     this._destroyed.next();
     this._destroyed.complete();
   }
