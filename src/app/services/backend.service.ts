@@ -4,7 +4,7 @@ import { Bet } from "@app/models/bet.interface";
 import { Environment } from "@app/models/environment.interface";
 import { EnvironmentToken } from "@app/tokens/environment.token";
 import { map, Observable } from "rxjs";
-import { Manager } from "socket.io-client";
+import { io } from "socket.io-client";
 
 @Injectable()
 //NOTE: we provide this service in dashboard.component.ts
@@ -12,13 +12,24 @@ export class BackendService {
   private readonly _apiUrl =
     this._environment.configuration.backendConfig.apiUrl;
 
-  private readonly manager = new Manager(this._apiUrl, { autoConnect: false });
+  // private readonly _socket = io(this._apiUrl);
 
   constructor(
     @Inject(EnvironmentToken)
     private readonly _environment: Environment,
     private readonly _httpClient: HttpClient
-  ) {}
+  ) {
+    io(this._apiUrl).on("bet-updated", (message: Array<Bet>) => {
+      console.log("bet-updated", message);
+    });
+  }
+
+  /**
+   * check connection
+   */
+  ping(): Observable<void> {
+    return this._httpClient.get<void>(`${this._apiUrl}/`);
+  }
 
   /**
    * returns an array of `bet`.
