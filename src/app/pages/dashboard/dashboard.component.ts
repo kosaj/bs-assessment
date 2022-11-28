@@ -15,6 +15,7 @@ import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
   template: `
     <h1>dashboard works!</h1>
     <button (click)="beginPooling()">Begin</button>
+    <button (click)="endPooling()">End</button>
   `,
   styleUrls: ["./dashboard.component.scss"],
   providers: [BackendService],
@@ -59,15 +60,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  // endPooling(): void {
-  //   this._backendService
-  //     .stopPulling()
-  //     .pipe(take(1), takeUntil(this._destroyed))
-  //     .subscribe();
-  // }
+  endPooling(): void {
+    this._backendService
+      .stopPulling()
+      .pipe(take(1), takeUntil(this._destroyed))
+      .subscribe();
+  }
 
   ngOnDestroy(): void {
-    // this.endPooling();
+    this.endPooling();
 
     this._destroyed.next();
     this._destroyed.complete();
