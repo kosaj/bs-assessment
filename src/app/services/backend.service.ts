@@ -53,11 +53,11 @@ export class BackendService {
   }
 
   /**
-   * starts the websocket pulling
+   * starts the websocket pulling (1000/025 results in refresh after 4s passes)
    * @param {number} rate - rate is in request by second
    * @returns {Observable<void>}
    */
-  startPulling(rate: number): Observable<void> {
+  startPulling(rate: number = 0.25): Observable<void> {
     return this._httpClient.get<void>(
       `${this._apiUrl}/pulling/start?rate=${rate}`
     );
