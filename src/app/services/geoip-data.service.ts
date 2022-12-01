@@ -6,7 +6,8 @@ import {
   OnDestroy,
   Provider,
 } from "@angular/core";
-import { Environment, EnvironmentToken } from "@app/tokens/environment.token";
+import { Environment } from "@app/models/environment.interface";
+import { EnvironmentToken } from "@app/tokens/environment.token";
 import {
   catchError,
   defer,
@@ -73,7 +74,7 @@ export class GeoipDataService implements OnDestroy {
 
   private readonly _geoipData$: Observable<GeoipData> = defer(() => {
     const { apiUrl, apiKey } = this._environment.configuration.geoipConfig;
-    return this._httpClient.get(`${apiUrl}?key=${apiKey}`).pipe(
+    return this._httpClient.get(`${apiUrl}/?key=${apiKey}`).pipe(
       map(
         (result: any) =>
           <GeoipData>{

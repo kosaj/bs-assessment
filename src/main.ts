@@ -12,10 +12,13 @@ if (environment.production) {
   enableProdMode();
 }
 
+//NOTE: route debug disabled for now
+const hidden = true;
+
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(HttpClientModule),
-    environment.production
+    hidden ?? environment.production
       ? provideRouter(APP_ROUTES)
       : provideRouter(APP_ROUTES, withDebugTracing()),
     EnvironmentTokenProvider,
