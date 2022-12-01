@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Bet } from "@app/models/bet.interface";
-import { BackendService } from "@app/services/backend.service";
+import { ApiService } from "@app/services/api.service";
 import {
   SocketStatus,
   WebsocketService,
@@ -18,13 +18,13 @@ import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
     <button (click)="endPooling()">End</button>
   `,
   styleUrls: ["./dashboard.component.scss"],
-  providers: [BackendService],
+  providers: [ApiService],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private readonly _destroyed = new Subject<void>();
 
   constructor(
-    private readonly _backendService: BackendService,
+    private readonly _backendService: ApiService,
     private readonly _websocketService: WebsocketService
   ) {}
 
