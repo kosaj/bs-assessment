@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Bet } from "@app/models/bet.interface";
 import { createAction, props } from "@ngrx/store";
 
@@ -8,5 +9,5 @@ export const initSuccess = createAction(
 );
 export const initFailure = createAction(
   "[Bet] Initialize Failure",
-  props<{ error: any }>()
+  props<{ error: HttpErrorResponse }>()
 );
