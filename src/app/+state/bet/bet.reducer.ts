@@ -3,6 +3,8 @@ import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { Action, createReducer, on } from "@ngrx/store";
 import * as BetActions from "./bet.actions";
 
+export const BET_FEATURE_KEY = "bet";
+
 export interface State extends EntityState<Bet> {
   loaded: boolean;
   error?: string | null;
@@ -15,7 +17,6 @@ export const initialState: State = betAdapter.getInitialState({
   error: null,
 });
 
-export const BET_FEATURE_KEY = "bet";
 const betReducer = createReducer(
   initialState,
   on(
