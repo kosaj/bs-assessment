@@ -12,19 +12,12 @@ export const betAdapter: EntityAdapter<Bet> = createEntityAdapter<Bet>();
 
 export const initialState: State = betAdapter.getInitialState({
   loaded: false,
+  error: null,
 });
 
 export const BET_FEATURE_KEY = "bet";
 const betReducer = createReducer(
   initialState,
-  on(
-    BetActions.init,
-    (state): State => ({
-      ...state,
-      loaded: false,
-      error: null,
-    })
-  ),
   on(
     BetActions.initSuccess,
     (state): State => ({
