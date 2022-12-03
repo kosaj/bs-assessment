@@ -11,3 +11,13 @@ export const initFailure = createAction(
   "[Bet] Initialize Failure",
   props<{ error: HttpErrorResponse }>()
 );
+
+export const updateSuccess = createAction(
+  "[Bet] Update Success",
+  props<{ bets: Array<Bet> }>()
+);
+
+export const updateFailure = createAction(
+  "[Bet] Update Failure",
+  props<{ error: HttpErrorResponse }>()
+);
