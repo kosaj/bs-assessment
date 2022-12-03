@@ -6,7 +6,7 @@ import * as BetActions from "./bet.actions";
 
 @Injectable()
 export class BetEffects {
-  init$ = createEffect(() => {
+  readonly init$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BetActions.init),
       switchMap((action) =>
