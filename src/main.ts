@@ -8,6 +8,7 @@ import { EnvironmentTokenProvider } from "@app/tokens/environment.token";
 import { provideEffects } from "@ngrx/effects";
 import { provideStore } from "@ngrx/store";
 import { provideStoreDevtools } from "@ngrx/store-devtools";
+import { BetEffects } from "./app/+state/bet/bet.effects";
 import { AppComponent } from "./app/app.component";
 import { environment } from "./environments/environment";
 
@@ -29,6 +30,6 @@ bootstrapApplication(AppComponent, {
     //NGRX
     provideStore({}),
     provideStoreDevtools(),
-    provideEffects([]),
+    provideEffects([BetEffects]),
   ],
 }).catch((err) => console.error(err));
