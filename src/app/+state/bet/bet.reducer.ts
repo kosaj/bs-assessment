@@ -17,7 +17,7 @@ export const initialState: State = betAdapter.getInitialState({
   error: null,
 });
 
-const betReducer = createReducer(
+export const betReducer = createReducer(
   initialState,
   on(
     BetActions.initSuccess,

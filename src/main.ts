@@ -4,6 +4,7 @@ import { bootstrapApplication } from "@angular/platform-browser";
 import { provideRouter, withDebugTracing } from "@angular/router";
 import { APP_ROUTES } from "@app/routes/app-routing";
 import { GetGeoipProvider } from "@app/services/geoip-data.service";
+import { betReducer } from "@app/state/bet/bet.reducer";
 import { EnvironmentTokenProvider } from "@app/tokens/environment.token";
 import { provideEffects } from "@ngrx/effects";
 import { provideStore } from "@ngrx/store";
@@ -28,7 +29,7 @@ bootstrapApplication(AppComponent, {
     EnvironmentTokenProvider,
     GetGeoipProvider,
     //NGRX
-    provideStore({}),
+    provideStore({ bet: betReducer }),
     provideStoreDevtools(),
     provideEffects([BetEffects]),
   ],
