@@ -1,13 +1,9 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Bet } from "@app/models/bet.interface";
 import { ApiService } from "@app/services/api.service";
-import {
-  SocketStatus,
-  WebsocketService,
-} from "@app/services/websocket.service";
+import { WebsocketService } from "@app/services/websocket.service";
 import { BetFacade } from "@app/state/bet/bet.facade";
-import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
+import { Subject, take, takeUntil } from "rxjs";
 
 @Component({
   selector: "app-dashboard",
@@ -19,7 +15,7 @@ import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
     <button (click)="endPooling()">End</button>
   `,
   styleUrls: ["./dashboard.component.scss"],
-  providers: [ApiService, BetFacade],
+  providers: [BetFacade],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private readonly _destroyed = new Subject<void>();
@@ -35,28 +31,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this._betFacade.bets$.subscribe((bets) => console.log(bets));
 
-    this._websocketService.connected$
-      .pipe(takeUntil(this._destroyed))
-      .subscribe((status: SocketStatus) => console.log(status));
+    // this._websocketService.connected$
+    //   .pipe(takeUntil(this._destroyed))
+    //   .subscribe((status: SocketStatus) => console.log(status));
 
-    this._websocketService.betUpdated$
-      .pipe(takeUntil(this._destroyed))
-      .subscribe((bets: Array<Bet>) => console.log(bets));
+    // this._websocketService.betUpdated$
+    //   .pipe(takeUntil(this._destroyed))
+    //   .subscribe((bets: Array<Bet>) => console.log(bets));
 
-    forkJoin([
-      this._apiService.generateBets(10),
-      this._apiService.getBets(),
-      this._apiService.getBet(5),
-    ])
-      .pipe(
-        takeUntil(this._destroyed),
-        tap(([generateBets, getBets, getBet]) => {
-          console.log("generateBets", generateBets);
-          console.log("getBets", getBets);
-          console.log("getBet", getBet);
-        })
-      )
-      .subscribe();
+    // forkJoin([
+    //   this._apiService.generateBets(10),
+    //   this._apiService.getBets(),
+    //   this._apiService.getBet(5),
+    // ])
+    //   .pipe(
+    //     takeUntil(this._destroyed),
+    //     tap(([generateBets, getBets, getBet]) => {
+    //       console.log("generateBets", generateBets);
+    //       console.log("getBets", getBets);
+    //       console.log("getBet", getBet);
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   beginPooling(): void {

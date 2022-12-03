@@ -5,8 +5,9 @@ import { Environment } from "@app/models/environment.interface";
 import { EnvironmentToken } from "@app/tokens/environment.token";
 import { map, Observable } from "rxjs";
 
-@Injectable()
-//NOTE: we provide this service in dashboard.component.ts
+@Injectable({
+  providedIn: "root",
+})
 export class ApiService {
   private readonly _apiUrl =
     this._environment.configuration.backendConfig.apiUrl;
