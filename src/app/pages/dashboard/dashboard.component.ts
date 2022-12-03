@@ -33,6 +33,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._betFacade.initStore(30);
 
+    this._betFacade.bets$.subscribe((bets) => console.log(bets));
+
     this._websocketService.connected$
       .pipe(takeUntil(this._destroyed))
       .subscribe((status: SocketStatus) => console.log(status));
