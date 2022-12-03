@@ -1,1 +1,1 @@
-export const BET_FEATURE_KEY = "bets";
+export const BET_FEATURE_KEY = "bet";
