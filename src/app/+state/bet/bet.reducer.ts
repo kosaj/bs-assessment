@@ -31,7 +31,8 @@ const betReducer = createReducer(
       ...state,
       loaded: true,
     })
-  )
+  ),
+  on(BetActions.initFailure, (state, { error }): State => ({ ...state, error }))
 );
 
 export function reducer(state: State | undefined, action: Action) {
