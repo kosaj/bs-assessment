@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Bet } from "@app/models/bet.interface";
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { Action, createReducer, on } from "@ngrx/store";
@@ -7,7 +8,7 @@ export const BET_FEATURE_KEY = "bet";
 
 export interface State extends EntityState<Bet> {
   loaded: boolean;
-  error?: string | null;
+  error?: HttpErrorResponse | null;
 }
 
 export const betAdapter: EntityAdapter<Bet> = createEntityAdapter<Bet>();
@@ -19,13 +20,9 @@ export const initialState: State = betAdapter.getInitialState({
 
 export const betReducer = createReducer(
   initialState,
-  on(
-    BetActions.initSuccess,
-    (state): State => ({
-      ...state,
-      loaded: true,
-    })
-  ),
+  on(BetActions.initSuccess, (state, { bets }): State => {
+    return betAdapter.addMany(bets, { ...state, loaded: true });
+  }),
   on(
     BetActions.initFailure,
     (state, { error }): State => ({

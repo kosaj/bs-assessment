@@ -29,6 +29,7 @@ bootstrapApplication(AppComponent, {
     EnvironmentTokenProvider,
     GetGeoipProvider,
     //NGRX
+    //TODO: move to feature (dashboard)
     provideStore({ bet: fromBet.reducer }),
     provideStoreDevtools(),
     provideEffects([BetEffects]),
