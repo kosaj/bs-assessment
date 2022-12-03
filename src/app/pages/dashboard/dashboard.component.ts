@@ -6,6 +6,7 @@ import {
   SocketStatus,
   WebsocketService,
 } from "@app/services/websocket.service";
+import { BetFacade } from "@app/state/bet/bet.facade";
 import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
 
 @Component({
@@ -18,17 +19,20 @@ import { forkJoin, Subject, take, takeUntil, tap } from "rxjs";
     <button (click)="endPooling()">End</button>
   `,
   styleUrls: ["./dashboard.component.scss"],
-  providers: [ApiService],
+  providers: [ApiService, BetFacade],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private readonly _destroyed = new Subject<void>();
 
   constructor(
-    private readonly _backendService: ApiService,
-    private readonly _websocketService: WebsocketService
+    private readonly _apiService: ApiService,
+    private readonly _websocketService: WebsocketService,
+    private readonly _betFacade: BetFacade
   ) {}
 
   ngOnInit(): void {
+    this._betFacade.initStore(30);
+
     this._websocketService.connected$
       .pipe(takeUntil(this._destroyed))
       .subscribe((status: SocketStatus) => console.log(status));
@@ -38,9 +42,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .subscribe((bets: Array<Bet>) => console.log(bets));
 
     forkJoin([
-      this._backendService.generateBets(10),
-      this._backendService.getBets(),
-      this._backendService.getBet(5),
+      this._apiService.generateBets(10),
+      this._apiService.getBets(),
+      this._apiService.getBet(5),
     ])
       .pipe(
         takeUntil(this._destroyed),
@@ -54,14 +58,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   beginPooling(): void {
-    this._backendService
+    this._apiService
       .startPulling()
       .pipe(take(1), takeUntil(this._destroyed))
       .subscribe();
   }
 
   endPooling(): void {
-    this._backendService
+    this._apiService
       .stopPulling()
       .pipe(take(1), takeUntil(this._destroyed))
       .subscribe();
