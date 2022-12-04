@@ -9,6 +9,7 @@
     display: inline-block;
     min-width: 64px;
     overflow: visible;    
+    position: relative;
 
     & > .v-button-wrapper {
         padding: 0 8px;

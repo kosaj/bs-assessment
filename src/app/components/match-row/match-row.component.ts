@@ -30,5 +30,15 @@ import { VButton } from "src/shared/components/button/button.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MatchRowComponent {
-  @Input() item!: Bet;
+  @Input()
+  set item(value: Bet) {
+    this._item = value;
+  }
+
+  get item(): Bet {
+    return this._item;
+  }
+
+  private _item!: Bet;
+  private _previousItem: Bet | undefined;
 }
