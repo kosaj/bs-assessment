@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { BetFacade } from "@app/+state/bet/bet.facade";
 import { ApiService } from "@app/services/api.service";
+import { GeoipDataService } from "@app/services/geoip-data.service";
 import { Subject, take, takeUntil } from "rxjs";
 
 @Component({
@@ -21,7 +22,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly _apiService: ApiService,
-    private readonly _betFacade: BetFacade
+    private readonly _betFacade: BetFacade,
+    private readonly _geoipDataService: GeoipDataService
   ) {}
 
   ngOnInit(): void {
