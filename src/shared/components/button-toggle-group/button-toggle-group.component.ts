@@ -10,7 +10,7 @@ import {
 @Component({
   selector: "v-button-toggle-group",
   standalone: true,
-  template: ` <p>button-toggle-group works!</p> `,
+  template: `<ng-content select="button[v-button-toggle]"></ng-content>`,
   styleUrls: ["./button-toggle-group.component.scss"],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
