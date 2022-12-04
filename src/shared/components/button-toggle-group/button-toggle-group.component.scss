@@ -1,23 +1,17 @@
 .v-button-toggle-group {
     display: inline-flex;
     gap: 0.5rem;
-}  
+}
 
 .v-base-button.v-button-toggle {
-    
-
     &--checked {
         background-color: #ffaa00;
         border-color: #ffaa00;
 
-        @media (hover:hover) {
+        @media (hover: hover) {
             &:hover {
-                background-color:  #ffba1a
+                background-color: #ffba1a;
             }
         }
     }
 }
-
-// --odd-background-color-active: #ffaa00;
-//     --odd-background-color-active-hover: #ffba1a;
-//     --odd-background-color-active-pressed: #f59700;
