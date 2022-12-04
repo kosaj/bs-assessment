@@ -1,7 +1,14 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 /* eslint-disable @angular-eslint/directive-class-suffix */
 /* eslint-disable @angular-eslint/directive-selector */
-import { Directive, forwardRef, InjectionToken, Input } from "@angular/core";
+import {
+  Directive,
+  forwardRef,
+  Host,
+  InjectionToken,
+  Input,
+} from "@angular/core";
+import { VButtonToggleGroup } from "./button-toggle-group.component";
 
 export const buttonToggleToken = new InjectionToken<VButtonToggle>(
   "buttonToggleToken"
@@ -12,6 +19,7 @@ export const buttonToggleToken = new InjectionToken<VButtonToggle>(
   standalone: true,
   host: {
     class: "v-button-toggle",
+    "(click)": "_onButtonClick()",
   },
   providers: [
     {
@@ -32,4 +40,15 @@ export class VButtonToggle {
   }
 
   private _value!: any;
+
+  constructor(
+    @Host()
+    private readonly _toggleGroup: VButtonToggleGroup
+  ) {}
+
+  _onButtonClick(event: MouseEvent): void {
+    // event.preventDefault();
+    // console.log("click", this.value);
+    console.log("hello");
+  }
 }

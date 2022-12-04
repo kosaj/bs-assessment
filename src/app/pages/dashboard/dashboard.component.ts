@@ -15,9 +15,9 @@ import { VButton } from "src/shared/components/button/button.component";
     <button (click)="beginPooling()">Begin</button>
     <button (click)="endPooling()">End</button>
     <v-button-toggle-group>
-      <button v-button [v-button-toggle]="1"></button>
-      <button v-button [v-button-toggle]="2"></button>
-      <button v-button [v-button-toggle]="3"></button>
+      <button v-button [v-button-toggle]="1">1</button>
+      <button v-button [v-button-toggle]="2">2</button>
+      <button v-button [v-button-toggle]="3">3</button>
     </v-button-toggle-group>
   `,
   styleUrls: ["./dashboard.component.scss"],
