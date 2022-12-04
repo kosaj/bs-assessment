@@ -1,18 +1,22 @@
-import { CommonModule } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { BetFacade } from "@app/+state/bet/bet.facade";
 import { ApiService } from "@app/services/api.service";
 import { GeoipDataService } from "@app/services/geoip-data.service";
 import { Subject, take, takeUntil } from "rxjs";
+import { VButtonToggleGroupModule } from "src/shared/components/button-toggle-group/button-toggle-group.module";
+import { VButton } from "src/shared/components/button/button.component";
 
 @Component({
   selector: "app-dashboard",
   standalone: true,
-  imports: [CommonModule],
+  imports: [VButton, VButtonToggleGroupModule],
   template: `
     <h1>dashboard works!</h1>
     <button (click)="beginPooling()">Begin</button>
     <button (click)="endPooling()">End</button>
+    <button v-button [vButtonToggle]="1"></button>
+    <button v-button [vButtonToggle]="2"></button>
+    <button v-button [vButtonToggle]="3"></button>
   `,
   styleUrls: ["./dashboard.component.scss"],
   providers: [BetFacade],
