@@ -28,29 +28,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this._betFacade.initStore(30);
 
     this._betFacade.bets$.subscribe((bets) => console.log(bets));
-
-    // this._websocketService.connected$
-    //   .pipe(takeUntil(this._destroyed))
-    //   .subscribe((status: SocketStatus) => console.log(status));
-
-    // this._websocketService.betUpdated$
-    //   .pipe(takeUntil(this._destroyed))
-    //   .subscribe((bets: Array<Bet>) => console.log(bets));
-
-    // forkJoin([
-    //   this._apiService.generateBets(10),
-    //   this._apiService.getBets(),
-    //   this._apiService.getBet(5),
-    // ])
-    //   .pipe(
-    //     takeUntil(this._destroyed),
-    //     tap(([generateBets, getBets, getBet]) => {
-    //       console.log("generateBets", generateBets);
-    //       console.log("getBets", getBets);
-    //       console.log("getBet", getBet);
-    //     })
-    //   )
-    //   .subscribe();
   }
 
   beginPooling(): void {
