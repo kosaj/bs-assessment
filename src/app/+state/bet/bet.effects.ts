@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { ApiService } from "@app/services/api.service";
-import { WebsocketService } from "@app/services/websocket.service";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, of, switchMap } from "rxjs";
-import * as BetActions from "./bet.actions";
+import { Injectable } from '@angular/core';
+import { ApiService } from '@app/services/api.service';
+import { WebsocketService } from '@app/services/websocket.service';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, map, of, switchMap } from 'rxjs';
+import * as BetActions from './bet.actions';
 
 @Injectable()
 export class BetEffects {

@@ -1,8 +1,8 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 /* eslint-disable @angular-eslint/component-class-suffix */
 /* eslint-disable @angular-eslint/component-selector */
-import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
-import { SelectionModel } from "@angular/cdk/collections";
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { SelectionModel } from '@angular/cdk/collections';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -16,22 +16,22 @@ import {
   Output,
   QueryList,
   ViewEncapsulation,
-} from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { buttonToggleToken, VButtonToggle } from "./button-toggle.directive";
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { buttonToggleToken, VButtonToggle } from './button-toggle.directive';
 
 declare const ngDevMode: boolean;
 
 @Component({
-  selector: "v-button-toggle-group",
+  selector: 'v-button-toggle-group',
   standalone: true,
   template: `<ng-content select="button[v-button-toggle]"></ng-content>`,
-  styleUrls: ["./button-toggle-group.component.scss"],
+  styleUrls: ['./button-toggle-group.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    role: "group",
-    class: "v-button-toggle-group",
+    role: 'group',
+    class: 'v-button-toggle-group',
   },
   providers: [
     {
@@ -93,9 +93,9 @@ export class VButtonToggleGroup
     //NOTE: we want only one button to be selected if any at initialization!
     if (
       toggledButtons.length > 1 &&
-      (typeof ngDevMode === "undefined" || ngDevMode)
+      (typeof ngDevMode === 'undefined' || ngDevMode)
     ) {
-      throw new Error("Only one checked button is allowed!");
+      throw new Error('Only one checked button is allowed!');
     }
 
     this._selectionModel.select(

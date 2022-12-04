@@ -1,12 +1,12 @@
-import { HttpClient } from "@angular/common/http";
-import { Inject, Injectable } from "@angular/core";
-import { Bet } from "@app/models/bet.interface";
-import { Environment } from "@app/models/environment.interface";
-import { EnvironmentToken } from "@app/tokens/environment.token";
-import { map, Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { Bet } from '@app/models/bet.interface';
+import { Environment } from '@app/models/environment.interface';
+import { EnvironmentToken } from '@app/tokens/environment.token';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ApiService {
   private readonly _apiUrl =

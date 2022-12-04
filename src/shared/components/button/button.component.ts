@@ -5,21 +5,21 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-} from "@angular/core";
+} from '@angular/core';
 
 @Component({
-  selector: "button[v-button]",
+  selector: 'button[v-button]',
   standalone: true,
   template: `
     <div class="v-button-wrapper">
       <ng-content></ng-content>
     </div>
   `,
-  styleUrls: ["./button.component.scss"],
+  styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: "v-base-button v-button",
+    class: 'v-base-button v-button',
   },
 })
 export class VButton {}

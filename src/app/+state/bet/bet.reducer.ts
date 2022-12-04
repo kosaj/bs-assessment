@@ -1,10 +1,10 @@
-import { HttpErrorResponse } from "@angular/common/http";
-import { Bet } from "@app/models/bet.interface";
-import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
-import { Action, createReducer, on } from "@ngrx/store";
-import * as BetActions from "./bet.actions";
+import { HttpErrorResponse } from '@angular/common/http';
+import { Bet } from '@app/models/bet.interface';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import * as BetActions from './bet.actions';
 
-export const BET_FEATURE_KEY = "bet";
+export const BET_FEATURE_KEY = 'bet';
 
 export interface State extends EntityState<Bet> {
   loaded: boolean;

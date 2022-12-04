@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 /* eslint-disable @angular-eslint/directive-class-suffix */
 /* eslint-disable @angular-eslint/directive-selector */
-import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectorRef,
   Directive,
@@ -10,12 +10,12 @@ import {
   Host,
   InjectionToken,
   Input,
-  Output
-} from "@angular/core";
-import { VButtonToggleGroup } from "./button-toggle-group.component";
+  Output,
+} from '@angular/core';
+import { VButtonToggleGroup } from './button-toggle-group.component';
 
 export const buttonToggleToken = new InjectionToken<VButtonToggle>(
-  "buttonToggleToken"
+  'buttonToggleToken'
 );
 
 export class VButtonToggleChange {
@@ -23,15 +23,15 @@ export class VButtonToggleChange {
 }
 
 @Directive({
-  selector: "button[v-button-toggle]",
-  exportAs: "vButtonToggle",
+  selector: 'button[v-button-toggle]',
+  exportAs: 'vButtonToggle',
   standalone: true,
   host: {
-    role: "presentation",
-    class: "v-button-toggle",
-    "[class.v-button-toggle--checked]": "checked",
-    "[class.v-button-toggle--disabled]": "disabled",
-    "(click)": "_onButtonClick()",
+    role: 'presentation',
+    class: 'v-button-toggle',
+    '[class.v-button-toggle--checked]': 'checked',
+    '[class.v-button-toggle--disabled]': 'disabled',
+    '(click)': '_onButtonClick()',
   },
   providers: [
     {
@@ -45,7 +45,7 @@ export class VButtonToggle {
   readonly changed: EventEmitter<VButtonToggleChange> =
     new EventEmitter<VButtonToggleChange>();
 
-  @Input("v-button-toggle")
+  @Input('v-button-toggle')
   get value(): any {
     return this.value;
   }
@@ -53,12 +53,6 @@ export class VButtonToggle {
   set value(newValue: any) {
     this._value = newValue;
   }
-   
-
-
-  
-
-  
   private _value!: any;
 
   @Input()

@@ -1,9 +1,9 @@
-import { InjectionToken, Provider } from "@angular/core";
-import { Environment } from "@app/models/environment.interface";
-import { environment } from "../../environments/environment";
+import { InjectionToken, Provider } from '@angular/core';
+import { Environment } from '@app/models/environment.interface';
+import { environment } from '../../environments/environment';
 
 export const EnvironmentToken = new InjectionToken<Environment>(
-  "EnvironmentToken"
+  'EnvironmentToken'
 );
 
 export const EnvironmentTokenProvider: Provider = {

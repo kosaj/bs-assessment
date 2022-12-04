@@ -1,14 +1,14 @@
-import { AsyncPipe, NgFor } from "@angular/common";
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { BetFacade } from "@app/+state/bet/bet.facade";
-import { MatchRowComponent } from "@app/components/match-row/match-row.component";
-import { Bet } from "@app/models/bet.interface";
-import { ApiService } from "@app/services/api.service";
-import { GeoipDataService } from "@app/services/geoip-data.service";
-import { Observable, Subject, take, takeUntil } from "rxjs";
+import { AsyncPipe, NgFor } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BetFacade } from '@app/+state/bet/bet.facade';
+import { MatchRowComponent } from '@app/components/match-row/match-row.component';
+import { Bet } from '@app/models/bet.interface';
+import { ApiService } from '@app/services/api.service';
+import { GeoipDataService } from '@app/services/geoip-data.service';
+import { Observable, Subject, take, takeUntil } from 'rxjs';
 
 @Component({
-  selector: "app-dashboard",
+  selector: 'app-dashboard',
   standalone: true,
   imports: [NgFor, AsyncPipe, MatchRowComponent],
   template: `
@@ -19,7 +19,7 @@ import { Observable, Subject, take, takeUntil } from "rxjs";
       ></app-match-row>
     </div>
   `,
-  styleUrls: ["./dashboard.component.scss"],
+  styleUrls: ['./dashboard.component.scss'],
   providers: [BetFacade],
 })
 export class DashboardComponent implements OnInit, OnDestroy {

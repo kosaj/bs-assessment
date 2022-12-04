@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Store } from "@ngrx/store";
-import * as BetActions from "./bet.actions";
-import * as BetSelectors from "./bet.selectors";
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as BetActions from './bet.actions';
+import * as BetSelectors from './bet.selectors';
 
 @Injectable()
 export class BetFacade {
