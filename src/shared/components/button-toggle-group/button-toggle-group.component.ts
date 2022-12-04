@@ -1,19 +1,22 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 /* eslint-disable @angular-eslint/component-class-suffix */
 /* eslint-disable @angular-eslint/component-selector */
+import { SelectionModel } from "@angular/cdk/collections";
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChildren,
   forwardRef,
+  OnInit,
   QueryList,
   ViewEncapsulation,
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { tap } from "rxjs";
 import { buttonToggleToken, VButtonToggle } from "./button-toggle.directive";
+
+declare const ngDevMode: boolean;
 
 @Component({
   selector: "v-button-toggle-group",
@@ -33,29 +36,61 @@ import { buttonToggleToken, VButtonToggle } from "./button-toggle.directive";
     },
   ],
 })
-export class VButtonToggleGroup implements AfterViewInit, ControlValueAccessor {
+export class VButtonToggleGroup
+  implements OnInit, AfterContentInit, ControlValueAccessor
+{
   @ContentChildren(buttonToggleToken, { descendants: true })
   private _buttonToggles!: QueryList<VButtonToggle>;
+  private _selectionModel!: SelectionModel<VButtonToggle>;
 
   constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
-  ngAfterViewInit(): void {
-    this._buttonToggles.changes
-      .pipe(tap(() => this._changeDetectorRef.markForCheck()))
-      .subscribe();
+  ngAfterContentInit(): void {
+    const toggledButtons = this._buttonToggles.filter(
+      (toggle) => toggle.checked
+    );
+
+    //NOTE: we want only one button to be selected if any at initialization!
+    if (
+      toggledButtons.length > 1 &&
+      (typeof ngDevMode === "undefined" || ngDevMode)
+    ) {
+      throw new Error("Only one checked button is allowed!");
+    }
+
+    this._selectionModel.select(
+      ...this._buttonToggles.filter((toggle) => toggle.checked)
+    );
   }
 
-  _onTouched: () => any = () => {};
+  ngOnInit(): void {
+    this._selectionModel = new SelectionModel<VButtonToggle>(
+      false,
+      undefined,
+      false
+    );
+  }
 
+  _onTouchedFn: () => any = () => {};
+  _onChangeFn: (value: any) => void = () => {};
+
+  /**ControlValueAccessor */
   writeValue(obj: any): void {
-    throw new Error("Method not implemented.");
+    // this.value = value;
+    this._changeDetectorRef.markForCheck();
   }
+
+  /**ControlValueAccessor */
   registerOnChange(fn: any): void {
-    throw new Error("Method not implemented.");
+    this._onChangeFn = fn;
   }
+
+  /**ControlValueAccessor */
   registerOnTouched(fn: any): void {
-    throw new Error("Method not implemented.");
+    this._onTouchedFn = fn;
   }
+
+  /**ControlValueAccessor */
   setDisabledState?(isDisabled: boolean): void {
     throw new Error("Method not implemented.");
   }
