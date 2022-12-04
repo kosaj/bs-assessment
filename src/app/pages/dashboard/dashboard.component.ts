@@ -22,7 +22,7 @@ import { Observable, Subject, take, takeUntil } from 'rxjs';
   styleUrls: ['./dashboard.component.scss'],
   providers: [BetFacade],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardPage implements OnInit, OnDestroy {
   private readonly _destroyed = new Subject<void>();
   readonly allBets$: Observable<Array<Bet>> = this._betFacade.allBets$;
 

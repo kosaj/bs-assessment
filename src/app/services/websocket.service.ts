@@ -101,7 +101,7 @@ export class WebsocketService implements OnDestroy {
   private _getObservable<T = void>(
     websocketEvent: WebsocketEvent
   ): Observable<T> {
-    return new Observable((subscribe) => {
+    return new Observable(subscribe => {
       this._clientSocket.on(websocketEvent, (data?: T) => {
         subscribe.next(data);
       });

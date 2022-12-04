@@ -10,10 +10,10 @@ export class BetEffects {
   readonly init$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BetActions.init),
-      switchMap((action) =>
+      switchMap(action =>
         this.apiService.generateBets(action.size).pipe(
-          map((bets) => BetActions.initSuccess({ bets })),
-          catchError((error) => of(BetActions.initFailure({ error })))
+          map(bets => BetActions.initSuccess({ bets })),
+          catchError(error => of(BetActions.initFailure({ error })))
         )
       )
     );
@@ -21,13 +21,13 @@ export class BetEffects {
 
   readonly update$ = createEffect(() => {
     return this.websocketService.betUpdated$.pipe(
-      map((bets) => {
-        const updatesBets = bets.map((bet) =>
+      map(bets => {
+        const updatesBets = bets.map(bet =>
           Object.assign({}, { id: bet.id, changes: bet })
         );
         return BetActions.updateSuccess({ bets: updatesBets });
       }),
-      catchError((error) => of(BetActions.updateFailure({ error })))
+      catchError(error => of(BetActions.updateFailure({ error })))
     );
   });
 

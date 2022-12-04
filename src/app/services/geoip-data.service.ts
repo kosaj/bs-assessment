@@ -4,7 +4,7 @@ import {
   Inject,
   Injectable,
   OnDestroy,
-  Provider,
+  Provider
 } from '@angular/core';
 import { Environment } from '@app/models/environment.interface';
 import { EnvironmentToken } from '@app/tokens/environment.token';
@@ -17,7 +17,7 @@ import {
   shareReplay,
   Subject,
   takeUntil,
-  tap,
+  tap
 } from 'rxjs';
 
 export interface GeoipData {
