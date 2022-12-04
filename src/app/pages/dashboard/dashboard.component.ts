@@ -12,13 +12,12 @@ import { Observable, Subject, take, takeUntil } from "rxjs";
   standalone: true,
   imports: [NgFor, AsyncPipe, MatchRowComponent],
   template: `
-    <h1>dashboard works!</h1>
-    <button (click)="beginPooling()">Begin</button>
-    <button (click)="endPooling()">End</button>
-    <app-match-row
-      [item]="bet"
-      *ngFor="let bet of allBets$ | async; trackBy: betById"
-    ></app-match-row>
+    <div class="match-container">
+      <app-match-row
+        [item]="bet"
+        *ngFor="let bet of allBets$ | async; trackBy: betById"
+      ></app-match-row>
+    </div>
   `,
   styleUrls: ["./dashboard.component.scss"],
   providers: [BetFacade],
@@ -34,25 +33,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this._betFacade.initStore(30);
-  }
-
-  beginPooling(): void {
+    this._betFacade.initStore(10);
     this._apiService
       .startPulling()
       .pipe(take(1), takeUntil(this._destroyed))
       .subscribe();
   }
 
-  endPooling(): void {
+  ngOnDestroy(): void {
     this._apiService
       .stopPulling()
       .pipe(take(1), takeUntil(this._destroyed))
       .subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.endPooling();
 
     this._destroyed.next();
     this._destroyed.complete();
