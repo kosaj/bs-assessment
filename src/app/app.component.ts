@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { GeoipDataService } from "./services/geoip-data.service";
+import { GeoipDataService } from "@app/services/geoip-data.service";
 
 @Component({
   selector: "app-root",

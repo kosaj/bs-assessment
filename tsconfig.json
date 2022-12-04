@@ -25,7 +25,7 @@
       "@app/tokens/*": ["src/app/tokens/*"],
       "@app/services/*": ["src/app/services/*"],
       "@app/models/*": ["src/app/models/*"],
-      "@app/state/*": ["src/app/+state/*"]
+      "@app/+state/*": ["src/app/+state/*"]
     }
   },
   "angularCompilerOptions": {

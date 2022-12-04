@@ -1,8 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { BetFacade } from "@app/+state/bet/bet.facade";
 import { ApiService } from "@app/services/api.service";
-import { WebsocketService } from "@app/services/websocket.service";
-import { BetFacade } from "@app/state/bet/bet.facade";
 import { Subject, take, takeUntil } from "rxjs";
 
 @Component({
@@ -22,7 +21,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly _apiService: ApiService,
-    private readonly _websocketService: WebsocketService,
     private readonly _betFacade: BetFacade
   ) {}
 
