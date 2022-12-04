@@ -10,7 +10,7 @@ import {
 @Component({
   selector: "button[v-button]",
   standalone: true,
-  template: ` <p>button works!</p> `,
+  template: `<ng-content></ng-content>`,
   styleUrls: ["./button.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,

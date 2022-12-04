@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-host-metadata-property */
 /* eslint-disable @angular-eslint/directive-class-suffix */
 /* eslint-disable @angular-eslint/directive-selector */
 import { Directive, forwardRef, InjectionToken, Input } from "@angular/core";
@@ -9,6 +10,9 @@ export const buttonToggleToken = new InjectionToken<VButtonToggle>(
   selector: "button[v-button-toggle]",
   exportAs: "vButtonToggle",
   standalone: true,
+  host: {
+    class: "v-button-toggle",
+  },
   providers: [
     {
       provide: buttonToggleToken,
