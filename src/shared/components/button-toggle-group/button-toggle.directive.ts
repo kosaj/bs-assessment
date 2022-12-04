@@ -1,10 +1,20 @@
 /* eslint-disable @angular-eslint/directive-class-suffix */
 /* eslint-disable @angular-eslint/directive-selector */
-import { Directive, Input } from "@angular/core";
+import { Directive, forwardRef, InjectionToken, Input } from "@angular/core";
 
+export const buttonToggleToken = new InjectionToken<VButtonToggle>(
+  "buttonToggleToken"
+);
 @Directive({
-  selector: "v-button[v-button-toggle]",
+  selector: "button[v-button-toggle]",
+  exportAs: "vButtonToggle",
   standalone: true,
+  providers: [
+    {
+      provide: buttonToggleToken,
+      useExisting: forwardRef(() => VButtonToggle),
+    },
+  ],
 })
 export class VButtonToggle {
   @Input("v-button-toggle")
@@ -13,7 +23,7 @@ export class VButtonToggle {
   }
 
   set value(newValue: any) {
-    console.log(newValue);
+    console.log("toggle value: ", newValue);
     this._value = newValue;
   }
 

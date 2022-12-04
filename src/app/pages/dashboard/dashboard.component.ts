@@ -14,9 +14,11 @@ import { VButton } from "src/shared/components/button/button.component";
     <h1>dashboard works!</h1>
     <button (click)="beginPooling()">Begin</button>
     <button (click)="endPooling()">End</button>
-    <button v-button [vButtonToggle]="1"></button>
-    <button v-button [vButtonToggle]="2"></button>
-    <button v-button [vButtonToggle]="3"></button>
+    <v-button-toggle-group>
+      <button v-button [v-button-toggle]="1"></button>
+      <button v-button [v-button-toggle]="2"></button>
+      <button v-button [v-button-toggle]="3"></button>
+    </v-button-toggle-group>
   `,
   styleUrls: ["./dashboard.component.scss"],
   providers: [BetFacade],
