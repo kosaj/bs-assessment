@@ -72,13 +72,18 @@ export class VButtonToggleGroup
     return this.selected?.value ?? undefined;
   }
 
-  set value(newValue: any) {}
+  set value(newValue: any) {
+    console.log(this._buttonToggles);
+    if (!this._buttonToggles) {
+      return;
+    }
 
-  private _value: any;
-
-  constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {
-    console.log(this.selected);
+    this._clearSelection();
+    this._selectValue(newValue);
+    this.valueChange.emit(this.value);
   }
+
+  constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
   ngAfterContentInit(): void {
     const toggledButtons = this._buttonToggles.filter(
@@ -110,8 +115,8 @@ export class VButtonToggleGroup
   _onChangeFn: (value: any) => void = () => {};
 
   /**ControlValueAccessor */
-  writeValue(obj: any): void {
-    // this.value = value;
+  writeValue(value: any): void {
+    this.value = value;
     this._changeDetectorRef.markForCheck();
   }
 
@@ -132,5 +137,21 @@ export class VButtonToggleGroup
 
   private _markButtonsForCheck() {
     this._buttonToggles?.forEach((toggle) => toggle.markForCheck());
+  }
+
+  private _clearSelection() {
+    this._selectionModel.clear();
+    this._buttonToggles.forEach((toggle) => (toggle.checked = false));
+  }
+
+  private _selectValue(value: any) {
+    const correspondingToggleButton = this._buttonToggles.find((toggle) => {
+      return toggle.value != null && toggle.value === value;
+    });
+
+    if (correspondingToggleButton) {
+      correspondingToggleButton.checked = true;
+      this._selectionModel.select(correspondingToggleButton);
+    }
   }
 }

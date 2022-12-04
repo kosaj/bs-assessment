@@ -1,30 +1,31 @@
+import { AsyncPipe, NgFor } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { BetFacade } from "@app/+state/bet/bet.facade";
+import { MatchRowComponent } from "@app/components/match-row/match-row.component";
+import { Bet } from "@app/models/bet.interface";
 import { ApiService } from "@app/services/api.service";
 import { GeoipDataService } from "@app/services/geoip-data.service";
-import { Subject, take, takeUntil } from "rxjs";
-import { VButtonToggleGroupModule } from "src/shared/components/button-toggle-group/button-toggle-group.module";
-import { VButton } from "src/shared/components/button/button.component";
+import { Observable, Subject, take, takeUntil } from "rxjs";
 
 @Component({
   selector: "app-dashboard",
   standalone: true,
-  imports: [VButton, VButtonToggleGroupModule],
+  imports: [NgFor, AsyncPipe, MatchRowComponent],
   template: `
     <h1>dashboard works!</h1>
     <button (click)="beginPooling()">Begin</button>
     <button (click)="endPooling()">End</button>
-    <v-button-toggle-group>
-      <button v-button [v-button-toggle]="1">1</button>
-      <button v-button [v-button-toggle]="2">2</button>
-      <button v-button [v-button-toggle]="3">3</button>
-    </v-button-toggle-group>
+    <app-match-row
+      [item]="bet"
+      *ngFor="let bet of allBets$ | async; trackBy: betById"
+    ></app-match-row>
   `,
   styleUrls: ["./dashboard.component.scss"],
   providers: [BetFacade],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private readonly _destroyed = new Subject<void>();
+  readonly allBets$: Observable<Array<Bet>> = this._betFacade.allBets$;
 
   constructor(
     private readonly _apiService: ApiService,
@@ -34,7 +35,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._betFacade.initStore(30);
-    this._betFacade.bets$.subscribe();
   }
 
   beginPooling(): void {
@@ -56,5 +56,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this._destroyed.next();
     this._destroyed.complete();
+  }
+
+  betById(index: number, bet: Bet): number {
+    return bet.id;
   }
 }

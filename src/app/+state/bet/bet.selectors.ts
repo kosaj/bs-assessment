@@ -5,9 +5,9 @@ import { betAdapter, BET_FEATURE_KEY } from "./bet.reducer";
 
 export const selectBetState =
   createFeatureSelector<EntityState<Bet>>(BET_FEATURE_KEY);
-const { selectEntities } = betAdapter.getSelectors();
+const { selectAll, selectEntities } = betAdapter.getSelectors();
 
-export const selectBets = createSelector(
+export const selectAllBets = createSelector(
   selectBetState,
-  (state: EntityState<Bet>) => selectEntities(state)
+  (state: EntityState<Bet>) => selectAll(state)
 );

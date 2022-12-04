@@ -51,7 +51,6 @@ export class VButtonToggle {
   }
 
   set value(newValue: any) {
-    console.log("toggle value: ", newValue);
     this._value = newValue;
   }
 

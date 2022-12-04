@@ -1,3 +1,10 @@
 .v-button-toggle-group {
     display: inline-flex;
+    gap: 0.5rem;
 }  
+
+.v-button-toggle {
+    &--checked {
+        background-color: red;
+    }
+}

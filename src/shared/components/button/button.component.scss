@@ -1,4 +1,20 @@
 .v-base-button {
     all: unset;
     cursor: pointer;
+    background-color: var(--odd-background-color);
+    border: 1px solid var(--odd-boder-color);
+    border-radius: 5px;
+    min-height: 34px;
+    text-align: center;
+    display: inline-block;
+    min-width: 64px;
+    overflow: visible;    
+
+    & > .v-button-wrapper {
+        padding: 0 8px;
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
 }
+

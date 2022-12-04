@@ -5,7 +5,7 @@ import * as BetSelectors from "./bet.selectors";
 
 @Injectable()
 export class BetFacade {
-  readonly bets$ = this.store.select(BetSelectors.selectBets);
+  readonly allBets$ = this.store.select(BetSelectors.selectAllBets);
 
   constructor(private readonly store: Store) {}
 
