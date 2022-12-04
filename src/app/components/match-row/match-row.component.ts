@@ -9,8 +9,10 @@ import { VButton } from "src/shared/components/button/button.component";
   standalone: true,
   imports: [DecimalPipe, VButton, VButtonToggleGroupModule],
   template: `
-    <div>{{ item.teams[0].name }}</div>
-    <div>{{ item.teams[1].name }}</div>
+    <div>
+      <div>{{ item.teams[0].name }}</div>
+      <div>{{ item.teams[1].name }}</div>
+    </div>
     <v-button-toggle-group>
       <button v-button [v-button-toggle]="1">
         <span class="name">1</span>

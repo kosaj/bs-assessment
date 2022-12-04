@@ -11,6 +11,20 @@
     overflow: visible;    
     position: relative;
 
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,  border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+    @media (hover:hover) {
+        &:hover {
+            background-color: #3a4b64;
+            border-color:   #4b607c;
+        }
+    }
+
+    &:active {
+        background-color: #324157;
+        border-color:   #415571;
+    }
+
     & > .v-button-wrapper {
         padding: 0 8px;
         display: flex;
@@ -18,4 +32,3 @@
         justify-content: center;
     }
 }
-

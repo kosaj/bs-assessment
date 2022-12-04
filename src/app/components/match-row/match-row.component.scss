@@ -1,6 +1,13 @@
 :host {
-    display: block;
+    display: grid;
+  grid-auto-flow: row;
+  grid-auto-columns: 1fr;
+  gap: 0.5rem;
    background-color: #212d3e;
    margin-bottom: 0.5rem;
 padding: 4px 12px 8px 8px;
+
+@media (min-width: 40em) {
+    grid-auto-flow: column;
+  }
 }
