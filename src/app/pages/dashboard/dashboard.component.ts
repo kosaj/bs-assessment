@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._betFacade.initStore(10);
     this._apiService
-      .startPulling()
+      .startPulling(0.05)
       .pipe(take(1), takeUntil(this._destroyed))
       .subscribe();
   }
