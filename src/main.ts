@@ -34,4 +34,4 @@ bootstrapApplication(AppComponent, {
     provideStoreDevtools(),
     provideEffects([BetEffects]),
   ],
-}).catch((err) => console.error(err));
+}).catch((err: any) => console.error(err));

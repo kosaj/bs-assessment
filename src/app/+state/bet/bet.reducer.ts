@@ -29,6 +29,16 @@ export const betReducer = createReducer(
       ...state,
       error,
     })
+  ),
+  on(BetActions.updateSuccess, (state, { bets }): State => {
+    return betAdapter.updateMany(bets, state);
+  }),
+  on(
+    BetActions.updateFailure,
+    (state, { error }): State => ({
+      ...state,
+      error,
+    })
   )
 );
 

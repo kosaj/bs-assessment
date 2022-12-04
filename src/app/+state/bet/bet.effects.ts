@@ -21,7 +21,12 @@ export class BetEffects {
 
   readonly update$ = createEffect(() => {
     return this.websocketService.betUpdated$.pipe(
-      map((bets) => BetActions.updateSuccess({ bets })),
+      map((bets) => {
+        const updatesBets = bets.map((bet) =>
+          Object.assign({}, { id: bet.id, changes: bet })
+        );
+        return BetActions.updateSuccess({ bets: updatesBets });
+      }),
       catchError((error) => of(BetActions.updateFailure({ error })))
     );
   });

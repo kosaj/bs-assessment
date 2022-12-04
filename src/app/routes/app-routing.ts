@@ -3,5 +3,5 @@ import { DashboardComponent } from "@app/pages/dashboard/dashboard.component";
 
 export const APP_ROUTES: Routes = [
   { path: "", pathMatch: "full", redirectTo: "/dashboard" },
-  { path: "dashboard", component: DashboardComponent },
+  { path: "dashboard", providers: [], component: DashboardComponent },
 ];

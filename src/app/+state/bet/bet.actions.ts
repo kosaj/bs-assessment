@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Bet } from "@app/models/bet.interface";
+import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
 
 export const init = createAction("[Bet] Initialize", props<{ size: number }>());
@@ -14,7 +15,7 @@ export const initFailure = createAction(
 
 export const updateSuccess = createAction(
   "[Bet] Update Success",
-  props<{ bets: Array<Bet> }>()
+  props<{ bets: Array<Update<Bet>> }>()
 );
 
 export const updateFailure = createAction(
