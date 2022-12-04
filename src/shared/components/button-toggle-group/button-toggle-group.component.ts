@@ -1,6 +1,7 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
 /* eslint-disable @angular-eslint/component-class-suffix */
 /* eslint-disable @angular-eslint/component-selector */
+import { BooleanInput, coerceBooleanProperty } from "@angular/cdk/coercion";
 import { SelectionModel } from "@angular/cdk/collections";
 import {
   AfterContentInit,
@@ -8,8 +9,11 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
+  EventEmitter,
   forwardRef,
+  Input,
   OnInit,
+  Output,
   QueryList,
   ViewEncapsulation,
 } from "@angular/core";
@@ -26,6 +30,7 @@ declare const ngDevMode: boolean;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
+    role: "group",
     class: "v-button-toggle-group",
   },
   providers: [
@@ -43,7 +48,37 @@ export class VButtonToggleGroup
   private _buttonToggles!: QueryList<VButtonToggle>;
   private _selectionModel!: SelectionModel<VButtonToggle>;
 
-  constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
+  @Output() readonly valueChange = new EventEmitter<any>();
+
+  get selected(): VButtonToggle | null {
+    return (
+      (this._selectionModel && this._selectionModel.selected)?.at(1) ?? null
+    );
+  }
+
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(value: BooleanInput) {
+    this._disabled = coerceBooleanProperty(value);
+    this._markButtonsForCheck();
+  }
+
+  private _disabled = false;
+
+  @Input()
+  get value(): any | undefined {
+    return this.selected?.value ?? undefined;
+  }
+
+  set value(newValue: any) {}
+
+  private _value: any;
+
+  constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {
+    console.log(this.selected);
+  }
 
   ngAfterContentInit(): void {
     const toggledButtons = this._buttonToggles.filter(
@@ -91,7 +126,11 @@ export class VButtonToggleGroup
   }
 
   /**ControlValueAccessor */
-  setDisabledState?(isDisabled: boolean): void {
-    throw new Error("Method not implemented.");
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  private _markButtonsForCheck() {
+    this._buttonToggles?.forEach((toggle) => toggle.markForCheck());
   }
 }
