@@ -10,7 +10,7 @@ import {
   Host,
   InjectionToken,
   Input,
-  Output,
+  Output
 } from "@angular/core";
 import { VButtonToggleGroup } from "./button-toggle-group.component";
 
@@ -53,7 +53,12 @@ export class VButtonToggle {
   set value(newValue: any) {
     this._value = newValue;
   }
+   
 
+
+  
+
+  
   private _value!: any;
 
   @Input()
