@@ -5,7 +5,7 @@ import {
   Component,
   ElementRef,
   Input,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { Bet } from '@app/models/bet.interface';
 import { VButtonToggleGroupModule } from 'src/shared/components/button-toggle-group/button-toggle-group.module';
@@ -66,7 +66,7 @@ const HINT_CALLBACK_TIME = 500;
     </v-button-toggle-group>
   `,
   styleUrls: ['./match-row.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MatchRowComponent implements OnDestroy {
   private _hintTimer: Timer | undefined;
@@ -97,7 +97,7 @@ export class MatchRowComponent implements OnDestroy {
   }
 
   get drawDiff(): '/' | '+' | '-' {
-    return !!this.previousItem
+    return this.previousItem
       ? this._previousItem!.draw - this._item.draw
         ? '+'
         : '-'
@@ -105,7 +105,7 @@ export class MatchRowComponent implements OnDestroy {
   }
 
   get firstTeamDiff(): '/' | '+' | '-' {
-    return !!this.previousItem
+    return this.previousItem
       ? this._previousItem!.teams[0].win - this._item.teams[0].win
         ? '+'
         : '-'
@@ -113,7 +113,7 @@ export class MatchRowComponent implements OnDestroy {
   }
 
   get secondTeamDiff(): '/' | '+' | '-' {
-    return !!this.previousItem
+    return this.previousItem
       ? this._previousItem!.teams[1].win - this._item.teams[1].win
         ? '+'
         : '-'
