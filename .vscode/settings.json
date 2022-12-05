@@ -1,22 +1,28 @@
-{
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    },
-    "editor.formatOnSave": true
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
-      "source.organizeImports": true
-    },
-    "editor.formatOnSave": true
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
-  },
-  "editor.suggest.snippetsPreventQuickSuggestions": false,
-  "editor.inlineSuggest.enabled": true
-}
+// {
+//   "[html]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode",
+//     "editor.codeActionsOnSave": {
+//       "source.fixAll.eslint": true
+//     },
+//     "editor.formatOnSave": true
+//   },
+//   "[typescript]": {
+//     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+//     "editor.codeActionsOnSave": {
+//       "source.fixAll.eslint": true,
+//       "source.organizeImports": true
+//     },
+//     "editor.formatOnSave": true
+//   },
+//   "[scss]": {
+//     "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+//   },
+//   "eslint.validate": ["javascript", "typescript", "html"],
+//   "eslint.options": {
+//     "extensions": [".ts", ".html"]
+//   },
+//   "editor.suggest.snippetsPreventQuickSuggestions": false,
+//   "editor.inlineSuggest.enabled": true
+// }
+
+{}

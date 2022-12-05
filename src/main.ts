@@ -30,7 +30,7 @@ bootstrapApplication(AppComponent, {
     GetGeoipProvider,
     //NGRX
     provideStore({ bet: fromBet.reducer }),
-    environment.production ? provideStoreDevtools() : [],
+    environment.production ? [] : provideStoreDevtools(),
     provideEffects([BetEffects])
   ]
 }).catch((err: any) => console.error(err));

@@ -1,5 +1,5 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { ConnectionPositionPair, OverlayModule } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
@@ -46,6 +46,7 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
           [cdkConnectedOverlayOpen]="isOpen"
           [cdkConnectedOverlayHasBackdrop]="true"
           (backdropClick)="isOpen = false"
+          [cdkConnectedOverlayPositionStrategy]=""
         >
           <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
         </ng-template>
@@ -55,6 +56,12 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  readonly positions = [
+    new ConnectionPositionPair(
+      { originX: 'center', originY: 'bottom' },
+      { overlayX: 'start', overlayY: 'top' }
+    )
+  ];
   readonly componentPortal = new ComponentPortal(TicketBucketComponent);
   readonly minWidth64em$: Observable<boolean> = this._breakpointObserver
     .observe(['(min-width: 64em)'])
