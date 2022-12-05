@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { GeoipDataService } from '@app/services/geoip-data.service';
 
 @Component({
   selector: 'app-ticket-bucket',
@@ -29,4 +30,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./ticket-bucket.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TicketBucketComponent {}
+export class TicketBucketComponent {
+  constructor(private readonly _geoipDataService: GeoipDataService) {}
+}

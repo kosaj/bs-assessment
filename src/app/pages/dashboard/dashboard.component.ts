@@ -4,7 +4,6 @@ import { BetFacade } from '@app/+state/bet/bet.facade';
 import { MatchRowComponent } from '@app/components/match-row/match-row.component';
 import { Bet } from '@app/models/bet.interface';
 import { ApiService } from '@app/services/api.service';
-import { GeoipDataService } from '@app/services/geoip-data.service';
 import { Observable, Subject, take, takeUntil } from 'rxjs';
 
 @Component({
@@ -28,8 +27,7 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   constructor(
     private readonly _apiService: ApiService,
-    private readonly _betFacade: BetFacade,
-    private readonly _geoipDataService: GeoipDataService
+    private readonly _betFacade: BetFacade
   ) {}
 
   ngOnInit(): void {
