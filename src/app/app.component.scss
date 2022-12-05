@@ -1,5 +1,4 @@
 :host {
-    // position: relative;
     display: grid;
 
     @media screen and (min-width: 64em) {
@@ -10,12 +9,21 @@
     .absolute {
         position: absolute;
         bottom: 20px;
-        left: 50%;
-        transform: translate(-50%, 0);
+        left: 0;
+        right: 0;
         z-index: 5;
+
+        .v-fab-button {
+            margin: auto;
+        }
     }
 
     aside {
+        display: none;
         padding: 16px 4px 16px 0;
+
+        @media screen and (min-width: 64em) {
+            display: block;
+        }
     }
 }

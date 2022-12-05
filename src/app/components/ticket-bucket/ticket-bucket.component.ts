@@ -21,8 +21,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <div class="bucket-actions">
       <input type="text" />
       <button>
-        <span>Zaloguj się i graj o</span>
-        <span>{{ 12.34 }}</span>
+        <div>Zaloguj się i graj o</div>
+        <div>{{ 12.34 }}</div>
       </button>
     </div>
   `,
