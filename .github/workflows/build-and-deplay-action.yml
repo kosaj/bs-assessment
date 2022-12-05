@@ -1,0 +1,28 @@
+name: 'build-and-deplay-action'
+on:
+  pull_request:
+    branches: ['development']
+  push:
+    branches: ['development']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.16]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install and build
+        working-directory: ./
+        run: npm install && npm run build
+
+      - name: Deploy
+        uses: jamesives/github-pages-deploy-action@4.4.1
+        with:
+          branch: gh-pages
+          folder: ./dist/client-app
