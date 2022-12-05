@@ -5,3 +5,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Links
 
 - [socket.io-client](https://socket.io/docs/v3/) - its v3 but gives an overview how to use it..
+- [redux-devtools](https://github.com/reduxjs/redux-devtools/)

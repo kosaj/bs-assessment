@@ -1,13 +1,13 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 import {
   APP_INITIALIZER,
   Inject,
   Injectable,
   OnDestroy,
-  Provider,
-} from "@angular/core";
-import { Environment } from "@app/models/environment.interface";
-import { EnvironmentToken } from "@app/tokens/environment.token";
+  Provider
+} from '@angular/core';
+import { Environment } from '@app/models/environment.interface';
+import { EnvironmentToken } from '@app/tokens/environment.token';
 import {
   catchError,
   defer,
@@ -17,8 +17,8 @@ import {
   shareReplay,
   Subject,
   takeUntil,
-  tap,
-} from "rxjs";
+  tap
+} from 'rxjs';
 
 export interface GeoipData {
   currency: Currency;
@@ -51,7 +51,7 @@ function getGeoipDataFactory(geoipDataService: GeoipDataService) {
 }
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class GeoipDataService implements OnDestroy {
   private readonly _destroyed = new Subject<void>();
@@ -125,9 +125,9 @@ export const GetGeoipProvider: Provider = {
 };
 
 const DEFAULT_GEOIP_DATA: GeoipData = {
-  currency: { code: "PLN", symbol: "PLN", symbolNative: "zł" },
+  currency: { code: 'PLN', symbol: 'PLN', symbolNative: 'zł' },
   location: {
-    continent: { code: "EU", name: "Europe" },
-    country: { code: "PL", inEU: true, name: "Poland" },
+    continent: { code: 'EU', name: 'Europe' },
+    country: { code: 'PL', inEU: true, name: 'Poland' },
   },
 };

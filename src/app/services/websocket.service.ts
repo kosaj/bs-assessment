@@ -1,7 +1,7 @@
-import { Inject, Injectable, OnDestroy } from "@angular/core";
-import { Bet } from "@app/models/bet.interface";
-import { Environment } from "@app/models/environment.interface";
-import { EnvironmentToken } from "@app/tokens/environment.token";
+import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Bet } from '@app/models/bet.interface';
+import { Environment } from '@app/models/environment.interface';
+import { EnvironmentToken } from '@app/tokens/environment.token';
 import {
   BehaviorSubject,
   filter,
@@ -9,29 +9,29 @@ import {
   Subject,
   takeUntil,
   tap,
-} from "rxjs";
-import * as io from "socket.io-client";
+} from 'rxjs';
+import * as io from 'socket.io-client';
 
 enum WebsocketEvent {
-  BetUpdated = "bet-updated",
-  Connect = "connect",
-  Disconnect = "disconnect",
+  BetUpdated = 'bet-updated',
+  Connect = 'connect',
+  Disconnect = 'disconnect',
 }
 
-export type SocketStatus = "connected" | "disconnected";
+export type SocketStatus = 'connected' | 'disconnected';
 export type DisconnectReason =
-  | "io server disconnect"
-  | "io client disconnect"
-  | "ping timeout"
-  | "transport close"
-  | "transport error";
+  | 'io server disconnect'
+  | 'io client disconnect'
+  | 'ping timeout'
+  | 'transport close'
+  | 'transport error';
 
 export function isNonNull<T>(value: T): value is NonNullable<T> {
   return value != null;
 }
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class WebsocketService implements OnDestroy {
   private readonly _destroyed = new Subject<void>();
@@ -70,7 +70,7 @@ export class WebsocketService implements OnDestroy {
       .pipe(
         takeUntil(this._destroyed),
         tap(() => {
-          this._connectedSource.next("connected");
+          this._connectedSource.next('connected');
         })
       )
       .subscribe();
@@ -79,10 +79,10 @@ export class WebsocketService implements OnDestroy {
       .pipe(
         takeUntil(this._destroyed),
         tap((reason: DisconnectReason) => {
-          console.error("Disconnection reason:", reason);
-          this._connectedSource.next("disconnected");
+          console.error('Disconnection reason:', reason);
+          this._connectedSource.next('disconnected');
 
-          if (reason === "io client disconnect") {
+          if (reason === 'io client disconnect') {
             //NOTE: the disconnection was initiated by the server, you need to reconnect manually
             this._clientSocket.connect();
           }
@@ -101,7 +101,7 @@ export class WebsocketService implements OnDestroy {
   private _getObservable<T = void>(
     websocketEvent: WebsocketEvent
   ): Observable<T> {
-    return new Observable((subscribe) => {
+    return new Observable(subscribe => {
       this._clientSocket.on(websocketEvent, (data?: T) => {
         subscribe.next(data);
       });

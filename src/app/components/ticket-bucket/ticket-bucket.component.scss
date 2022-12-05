@@ -1,0 +1,37 @@
+:host {
+    display: inline-flex;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    width: 100%;
+    flex-direction: column;
+
+    .bucket-header,
+    .bucket-content {
+        display: inline-flex;
+    }
+
+    .bucket-actions {
+        display: inline-grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 0.5rem;
+        padding: 0 12px 14px;
+    }
+
+    .bucket-header {
+        padding: 1rem;
+        align-items: center;
+    }
+
+    .header-counter {
+        display: inline-flex;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: #0070e1;
+        width: 24px;
+        height: 24px;
+        margin-right: 0.5rem;
+    }
+}
