@@ -20,7 +20,7 @@ import { Observable, Subject, take, takeUntil } from 'rxjs';
     </div>
   `,
   styleUrls: ['./dashboard.component.scss'],
-  providers: [BetFacade],
+  providers: [BetFacade]
 })
 export class DashboardPage implements OnInit, OnDestroy {
   private readonly _destroyed = new Subject<void>();
@@ -35,7 +35,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._betFacade.initStore(10);
     this._apiService
-      .startPulling(0.05)
+      .startPulling(0.15)
       .pipe(take(1), takeUntil(this._destroyed))
       .subscribe();
   }

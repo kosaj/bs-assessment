@@ -1,6 +1,10 @@
 .v-button-toggle-group {
     display: inline-flex;
     gap: 0.5rem;
+
+    & > .v-base-button {
+        flex: 1;
+    }
 }
 
 .v-base-button.v-button-toggle {

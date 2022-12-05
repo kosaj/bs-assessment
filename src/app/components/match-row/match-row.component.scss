@@ -10,4 +10,15 @@
   @media (min-width: 40em) {
     grid-auto-flow: column;
   }
+
+  .flex-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .team-name {
+    font-size: 0.875em;
+    line-height: 1.28571429;
+  }
 }
