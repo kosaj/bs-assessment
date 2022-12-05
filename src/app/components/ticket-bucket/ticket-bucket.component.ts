@@ -23,7 +23,9 @@ import { GeoipDataService } from '@app/services/geoip-data.service';
       <input type="text" />
       <button>
         <div>Zaloguj się i graj o</div>
-        <div>{{ 12.34 }}</div>
+        <div>
+          {{ 12.34 }}<span class="currency-symbol">{{ symbol }}</span>
+        </div>
       </button>
     </div>
   `,
@@ -31,5 +33,8 @@ import { GeoipDataService } from '@app/services/geoip-data.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketBucketComponent {
+  get symbol(): string {
+    return this._geoipDataService.value!.currency.symbolNative;
+  }
   constructor(private readonly _geoipDataService: GeoipDataService) {}
 }
