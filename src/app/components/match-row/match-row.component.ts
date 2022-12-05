@@ -97,6 +97,6 @@ export class MatchRowComponent implements OnDestroy {
   }
 
   private _toggleHint(): void {
-    this._elementRef.nativeElement.classList.toggle('match-row--hint');
+    this._elementRef.nativeElement.classList.toggle('app-match-row--hint');
   }
 }

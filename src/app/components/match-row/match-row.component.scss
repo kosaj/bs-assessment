@@ -21,4 +21,14 @@
     font-size: 0.875em;
     line-height: 1.28571429;
   }
+
+  &.app-match-row--hint .odd {
+    & .value-increase {
+      color: green;
+    }
+
+    & .value-decrease {
+      color: red;
+    }
+  }
 }
