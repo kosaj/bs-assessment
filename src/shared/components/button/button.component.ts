@@ -4,11 +4,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation
 } from '@angular/core';
 
+const BUTTON_HOST_ATTRIBUTES = ['v-button', 'v-fab-button'];
+
 @Component({
-  selector: 'button[v-button]',
+  selector: 'button[v-button] button[v-fab-button]',
   standalone: true,
   template: `
     <div class="v-button-wrapper">
@@ -19,7 +22,21 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'v-base-button v-button',
-  },
+    class: 'v-base-button'
+  }
 })
-export class VButton {}
+export class VButton {
+  constructor(private readonly _elementRef: ElementRef) {
+    for (const attr of BUTTON_HOST_ATTRIBUTES) {
+      if (this._hasHostAttributes(attr)) {
+        (_elementRef.nativeElement as HTMLElement).classList.add(attr);
+      }
+    }
+  }
+
+  private _hasHostAttributes(...attributes: string[]): boolean {
+    return attributes.some((attribute) =>
+      this._elementRef.nativeElement.hasAttribute(attribute)
+    );
+  }
+}
