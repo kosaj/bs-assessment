@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:gh-pages": "ng build --base-href=/bs-assessment/",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
