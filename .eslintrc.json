@@ -4,10 +4,7 @@
   "overrides": [
     {
       "files": ["*.html"],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended",
-        "plugin:prettier/recommended"
-      ],
+      "extends": ["plugin:@angular-eslint/template/recommended", "plugin:prettier/recommended"],
       "rules": {
         "prettier/prettier": ["off", { "singleQuote": true }]
       }
@@ -48,6 +45,8 @@
             "style": "camelCase"
           }
         ],
+        "@typescript-eslint/member-ordering": 0,
+        "@typescript-eslint/naming-convention": 0,
         "prettier/prettier": ["off", { "singleQuote": true }]
       }
     },
