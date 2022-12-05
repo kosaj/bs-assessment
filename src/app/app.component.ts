@@ -17,7 +17,7 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
     OverlayModule,
     NgIf,
     AsyncPipe,
-    VButton
+    VButton,
   ],
   template: `
     <main>
@@ -46,21 +46,20 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
           [cdkConnectedOverlayOpen]="isOpen"
           [cdkConnectedOverlayHasBackdrop]="true"
           (backdropClick)="isOpen = false"
-          [cdkConnectedOverlayPositionStrategy]=""
         >
           <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
         </ng-template>
       </span>
     </ng-template>
   `,
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   readonly positions = [
     new ConnectionPositionPair(
       { originX: 'center', originY: 'bottom' },
       { overlayX: 'start', overlayY: 'top' }
-    )
+    ),
   ];
   readonly componentPortal = new ComponentPortal(TicketBucketComponent);
   readonly minWidth64em$: Observable<boolean> = this._breakpointObserver
