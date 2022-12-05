@@ -11,7 +11,7 @@ import {
 const BUTTON_HOST_ATTRIBUTES = ['v-button', 'v-fab-button'];
 
 @Component({
-  selector: 'button[v-button] button[v-fab-button]',
+  selector: 'button[v-button], button[v-fab-button]',
   standalone: true,
   template: `
     <div class="v-button-wrapper">
