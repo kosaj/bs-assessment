@@ -75,7 +75,7 @@ export class VButtonToggle {
     this._disabled = coerceBooleanProperty(value);
   }
 
-  private _disabled: boolean = false;
+  private _disabled = false;
 
   constructor(
     @Host()
