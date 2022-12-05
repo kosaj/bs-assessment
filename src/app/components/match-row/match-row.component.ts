@@ -1,6 +1,7 @@
 import { DecimalPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -80,8 +81,10 @@ export class MatchRowComponent implements OnDestroy {
     }
 
     this._toggleHint();
+
     this._hintTimer = setTimeout(() => {
       this._toggleHint();
+      this._changeDetectorRef.markForCheck();
     }, HINT_CALLBACK_TIME);
   }
 
@@ -120,7 +123,10 @@ export class MatchRowComponent implements OnDestroy {
   private _item!: Bet;
   private _previousItem: Bet | undefined;
 
-  constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private readonly _elementRef: ElementRef<HTMLElement>,
+    private readonly _changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnDestroy(): void {
     if (this._hintTimer) {
