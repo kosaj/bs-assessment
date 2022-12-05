@@ -9,7 +9,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## HUSKY
 
-- we run test on 'pre-commit' hook
+- `npm run test -- --passWithNoTests` is beeing run on 'pre-commit' hook.
 
 ## Issues
 
