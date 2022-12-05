@@ -15,9 +15,9 @@ import { VButton } from 'src/shared/components/button/button.component';
       <router-outlet></router-outlet>
     </main>
     <ng-container
-      *ngIf="hideAside$ | async; else absoluteTemplate"
+      *ngIf="minWidth64em$ | async; else absoluteTemplate"
     ></ng-container>
-    <aside *ngIf="hideAside$ | async">
+    <aside *ngIf="minWidth64em$ | async">
       <!--  -->
     </aside>
 
@@ -30,7 +30,7 @@ import { VButton } from 'src/shared/components/button/button.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  readonly hideAside$: Observable<boolean> = this._breakpointObserver
+  readonly minWidth64em$: Observable<boolean> = this._breakpointObserver
     .observe(['(min-width: 64em)'])
     .pipe(map((result) => result.matches));
 
