@@ -19,10 +19,10 @@ jobs:
 
       - name: Install and build
         working-directory: ./
-        run: npm install && npm run build
+        run: npm ci && npm run build
 
       - name: Deploy
-        uses: jamesives/github-pages-deploy-action@4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
-          folder: ./dist/client-app
+          branch: gh-pages-development
+          folder: dist/client-app
