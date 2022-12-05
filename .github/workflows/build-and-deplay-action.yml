@@ -15,6 +15,7 @@ jobs:
         run: |
           npm ci
           npm run build:gh-pages
+          cp "dist/client-app/index.html" "dist/client-app/404.html"
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
