@@ -9,4 +9,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Issues
 
-- eslint for some reason don't want to lint .js files..
+- eslint for some reason don't want to lint .js files.. / same for json files
