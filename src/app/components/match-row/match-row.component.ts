@@ -11,7 +11,7 @@ import { VButtonToggleGroupModule } from 'src/shared/components/button-toggle-gr
 import { VButton } from 'src/shared/components/button/button.component';
 
 type Timer = ReturnType<typeof setTimeout>;
-const HINT_CALLBACK_TIME = 1000;
+const HINT_CALLBACK_TIME = 500;
 
 @Component({
   selector: 'app-match-row',
@@ -27,9 +27,11 @@ const HINT_CALLBACK_TIME = 1000;
         <span class="flex-row">
           <span class="name">1</span>
           <span
-            class="odd"
-            [class.value-increase]="{}"
-            [class.value-decrease]="{}"
+            [ngClass]="{
+              odd: true,
+              'value-increase': firstTeamDiff === '+',
+              'value-decrease': firstTeamDiff === '-'
+            }"
             >{{ item.teams[0].win | number : '1.2-2' }}</span
           >
         </span>
@@ -38,9 +40,11 @@ const HINT_CALLBACK_TIME = 1000;
         <span class="flex-row">
           <span class="name">X</span>
           <span
-            class="odd"
-            [class.value-increase]="{}"
-            [class.value-decrease]="{}"
+            [ngClass]="{
+              odd: true,
+              'value-increase': drawDiff === '+',
+              'value-decrease': drawDiff === '-'
+            }"
             >{{ item.draw | number : '1.2-2' }}</span
           >
         </span>
@@ -49,9 +53,11 @@ const HINT_CALLBACK_TIME = 1000;
         <span class="flex-row">
           <span class="name">2</span>
           <span
-            class="odd"
-            [class.value-increase]="{}"
-            [class.value-decrease]="{}"
+            [ngClass]="{
+              odd: true,
+              'value-increase': secondTeamDiff === '+',
+              'value-decrease': secondTeamDiff === '-'
+            }"
             >{{ item.teams[1].win | number : '1.2-2' }}</span
           >
         </span>
@@ -74,7 +80,9 @@ export class MatchRowComponent implements OnDestroy {
     }
 
     this._toggleHint();
-    this._hintTimer = setTimeout(() => this._toggleHint(), HINT_CALLBACK_TIME);
+    this._hintTimer = setTimeout(() => {
+      this._toggleHint();
+    }, HINT_CALLBACK_TIME);
   }
 
   get item(): Bet {
@@ -83,6 +91,30 @@ export class MatchRowComponent implements OnDestroy {
 
   get previousItem(): Bet | undefined {
     return this._previousItem;
+  }
+
+  get drawDiff(): '/' | '+' | '-' {
+    return !!this.previousItem
+      ? this._previousItem!.draw - this._item.draw
+        ? '+'
+        : '-'
+      : '/';
+  }
+
+  get firstTeamDiff(): '/' | '+' | '-' {
+    return !!this.previousItem
+      ? this._previousItem!.teams[0].win - this._item.teams[0].win
+        ? '+'
+        : '-'
+      : '/';
+  }
+
+  get secondTeamDiff(): '/' | '+' | '-' {
+    return !!this.previousItem
+      ? this._previousItem!.teams[1].win - this._item.teams[1].win
+        ? '+'
+        : '-'
+      : '/';
   }
 
   private _item!: Bet;
