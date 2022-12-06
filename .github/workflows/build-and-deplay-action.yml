@@ -14,11 +14,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
 
       - name: Install and build
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
         run: |
           npm ci
           npm run build:gh-pages
