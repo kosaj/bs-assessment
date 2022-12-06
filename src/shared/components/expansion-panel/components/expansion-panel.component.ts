@@ -1,20 +1,20 @@
+/* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/component-class-suffix */
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { VButton } from '../../button/button.component';
 
 @Component({
-  selector: 'app-expansion-panel',
+  selector: 'v-expansion-panel',
   standalone: true,
-  imports: [OverlayModule],
+  imports: [OverlayModule, VButton],
   template: `
     <button
           v-fab-button
           cdkOverlayOrigin
           #originOverlay="cdkOverlayOrigin"
           (click)="isOpen = true"
-        >   
-          -
-        </button>  
+        >-</button>  
  
         <ng-template
           cdkConnectedOverlay
@@ -23,12 +23,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
           [cdkConnectedOverlayHasBackdrop]="true"
           (backdropClick)="isOpen = false"   
         >
-        <div #body role="region"
-     
-        >
-          <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
-        </div>
-          
+          <div role="region" #body  [@bodyExpansion]="isOpen ? 'expanded' : 'collapsed'">
+            <ng-content></ng-content>
+          </div>
         </ng-template>
   `,
   styleUrls: ['./expansion-panel.component.scss'],
@@ -37,6 +34,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 })
 export class VExpansionPanel {
 
+  
   isOpen = false;
 }
 // [@bodyExpansion]="isOpen ? 'expanded' : 'collapsed'"

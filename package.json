@@ -43,6 +43,7 @@
     "@angular-eslint/template-parser": "14.3.1",
     "@angular/cli": "~14.2.10",
     "@angular/compiler-cli": "^14.2.0",
+    "@angular/language-service": "^14.2.1",
     "@ngrx/eslint-plugin": "^14.3.2",
     "@ngrx/schematics": "^14.3.2",
     "@types/jest": "^29.2.4",

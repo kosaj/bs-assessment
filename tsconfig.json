@@ -26,7 +26,12 @@
       "@app/services/*": ["src/app/services/*"],
       "@app/models/*": ["src/app/models/*"],
       "@app/+state/*": ["src/app/+state/*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "@angular/language-service"
+      }
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

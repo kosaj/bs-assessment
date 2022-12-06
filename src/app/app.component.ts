@@ -5,7 +5,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
-import { VButton } from 'src/shared/components/button/button.component';
+import { VExpansionPanel } from 'src/shared/components/expansion-panel/components/expansion-panel.component';
 import { bodyExpansionAnimations } from '../shared/components/expansion-panel/animations/open-close.animation';
 import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.component';
 @Component({
@@ -18,13 +18,13 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
     OverlayModule,
     NgIf,
     AsyncPipe,
-    VButton,
+    VExpansionPanel
   ],
    
   animations: [bodyExpansionAnimations.bodyExpansion],
   template: `
     <main>
-      <router-outlet></router-outlet>
+      <router-outlet></router-outlet>  
     </main>
     <ng-container
       *ngIf="minWidth64em$ | async; else absoluteTemplate"
@@ -35,8 +35,10 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
 
     <ng-template #absoluteTemplate>
       <span class="fixed">
-        
-        
+        <v-expansion-panel>
+        <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
+        </v-expansion-panel>
+      
       </span>
     </ng-template>
   `,
