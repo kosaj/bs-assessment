@@ -4,8 +4,8 @@ import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
-import { VButton } from 'src/shared/components/button/button.component';
+import { map, Observable } from 'rxjs';
+import { VExpansionPanel } from 'src/shared/components/expansion-panel/components/expansion-panel.component';
 import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.component';
 @Component({
   selector: 'app-root',
@@ -17,57 +17,39 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
     OverlayModule,
     NgIf,
     AsyncPipe,
-    VButton
+    VExpansionPanel
   ],
   template: `
     <main>
       <router-outlet></router-outlet>
     </main>
-    <ng-container
-      *ngIf="minWidth64em$ | async; else absoluteTemplate"
-    ></ng-container>
-    <aside *ngIf="minWidth64em$ | async">
-      <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
-    </aside>
-
-    <ng-template #absoluteTemplate>
-      <span class="absolute">
-        <button
-          v-fab-button
-          cdkOverlayOrigin
-          #originOverlay="cdkOverlayOrigin"
-          (click)="isOpen = true"
-        >
-          -
-        </button>
-        <ng-template
-          cdkConnectedOverlay
-          [cdkConnectedOverlayOrigin]="originOverlay"
-          [cdkConnectedOverlayOpen]="isOpen"
-          [cdkConnectedOverlayHasBackdrop]="true"
-          (backdropClick)="isOpen = false"
-        >
-          <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
+    <aside>
+      <span #contentWrapper class="aside-content-wrapper">
+        <span class="right" *ngIf="minWidth64em$ | async; else mobileBucket">
+          <ng-template
+            [cdkPortalOutlet]="ticketBucketComponentPortal"
+          ></ng-template>
+        </span>
+        <ng-template #mobileBucket>
+          <v-expansion-panel
+            class="bottom"
+            [componentPortal]="ticketBucketComponentPortal"
+          >
+          </v-expansion-panel>
         </ng-template>
       </span>
-    </ng-template>
+    </aside>
   `,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  readonly componentPortal = new ComponentPortal(TicketBucketComponent);
+  readonly ticketBucketComponentPortal = new ComponentPortal(
+    TicketBucketComponent
+  );
+
   readonly minWidth64em$: Observable<boolean> = this._breakpointObserver
     .observe(['(min-width: 64em)'])
-    .pipe(
-      map((result) => result.matches),
-      tap((state) => {
-        if (state) {
-          this.isOpen = false;
-        }
-      })
-    );
-
-  isOpen = false;
+    .pipe(map((result) => result.matches));
 
   constructor(private readonly _breakpointObserver: BreakpointObserver) {}
 }

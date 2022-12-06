@@ -15,7 +15,7 @@ import {
   OnInit,
   Output,
   QueryList,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { buttonToggleToken, VButtonToggle } from './button-toggle.directive';
@@ -31,15 +31,15 @@ declare const ngDevMode: boolean;
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'group',
-    class: 'v-button-toggle-group',
+    class: 'v-button-toggle-group'
   },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => VButtonToggleGroup),
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class VButtonToggleGroup
   implements OnInit, AfterContentInit, ControlValueAccessor
@@ -86,7 +86,9 @@ export class VButtonToggleGroup
   constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}
 
   ngAfterContentInit(): void {
-    const toggledButtons = this._buttonToggles.filter(toggle => toggle.checked);
+    const toggledButtons = this._buttonToggles.filter(
+      (toggle) => toggle.checked
+    );
 
     //NOTE: we want only one button to be selected if any at initialization!
     if (
@@ -97,7 +99,7 @@ export class VButtonToggleGroup
     }
 
     this._selectionModel.select(
-      ...this._buttonToggles.filter(toggle => toggle.checked)
+      ...this._buttonToggles.filter((toggle) => toggle.checked)
     );
   }
 
@@ -109,7 +111,9 @@ export class VButtonToggleGroup
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onTouchedFn: () => any = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onChangeFn: (value: any) => void = () => {};
 
   /**ControlValueAccessor */
@@ -134,16 +138,16 @@ export class VButtonToggleGroup
   }
 
   private _markButtonsForCheck() {
-    this._buttonToggles?.forEach(toggle => toggle.markForCheck());
+    this._buttonToggles?.forEach((toggle) => toggle.markForCheck());
   }
 
   private _clearSelection() {
     this._selectionModel.clear();
-    this._buttonToggles.forEach(toggle => (toggle.checked = false));
+    this._buttonToggles.forEach((toggle) => (toggle.checked = false));
   }
 
   private _selectValue(value: any) {
-    const correspondingToggleButton = this._buttonToggles.find(toggle => {
+    const correspondingToggleButton = this._buttonToggles.find((toggle) => {
       return toggle.value != null && toggle.value === value;
     });
 
