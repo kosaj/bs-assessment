@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 import { VButton } from 'src/shared/components/button/button.component';
+import { bodyExpansionAnimations } from '../shared/components/expansion-panel/animations/open-close.animation';
 import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.component';
 @Component({
   selector: 'app-root',
@@ -19,6 +20,8 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
     AsyncPipe,
     VButton,
   ],
+   
+  animations: [bodyExpansionAnimations.bodyExpansion],
   template: `
     <main>
       <router-outlet></router-outlet>
@@ -31,24 +34,9 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
     </aside>
 
     <ng-template #absoluteTemplate>
-      <span class="absolute">
-        <button
-          v-fab-button
-          cdkOverlayOrigin
-          #originOverlay="cdkOverlayOrigin"
-          (click)="isOpen = true"
-        >
-          -
-        </button>
-        <ng-template
-          cdkConnectedOverlay
-          [cdkConnectedOverlayOrigin]="originOverlay"
-          [cdkConnectedOverlayOpen]="isOpen"
-          [cdkConnectedOverlayHasBackdrop]="true"
-          (backdropClick)="isOpen = false"
-        >
-          <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
-        </ng-template>
+      <span class="fixed">
+        
+        
       </span>
     </ng-template>
   `,
