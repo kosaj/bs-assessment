@@ -4,9 +4,10 @@ import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { VButton } from '@shared/components/button/button.component';
 import { map, Observable } from 'rxjs';
-import { VExpansionPanel } from 'src/shared/components/expansion-panel/components/expansion-panel.component';
 import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.component';
+import { TicketFixedBucketComponent } from './components/ticket-fixed-bucket/ticket-fixed-bucket.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,7 +18,8 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
     OverlayModule,
     NgIf,
     AsyncPipe,
-    VExpansionPanel
+    TicketFixedBucketComponent,
+    VButton
   ],
   template: `
     <main>
@@ -31,11 +33,13 @@ import { TicketBucketComponent } from './components/ticket-bucket/ticket-bucket.
           ></ng-template>
         </span>
         <ng-template #mobileBucket>
-          <v-expansion-panel
+          <app-ticket-fixed-bucket
+            #fixedBucket="appTicketFixedBucket"
             class="bottom"
             [componentPortal]="ticketBucketComponentPortal"
           >
-          </v-expansion-panel>
+            <button v-fab-button (click)="fixedBucket.toggle()">-</button>
+          </app-ticket-fixed-bucket>
         </ng-template>
       </span>
     </aside>
