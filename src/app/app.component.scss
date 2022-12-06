@@ -1,34 +1,37 @@
 :host {
     display: grid;
+    grid-template-rows: minmax(0, 1fr) min-content;
+
+    .aside-content-wrapper {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+
+        .right {
+            display: none;
+        }
+
+        .bottom {
+            display: unset;
+        }
+    }
 
     @media screen and (min-width: 64em) {
         grid-template-columns: minmax(0, 1fr) 300px;
         column-gap: 18px;
-    }
 
-    .fixed {
-        position: fixed;
-        pointer-events: none;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 5;
+        .aside-content-wrapper {
+            all: unset;
+            flex: 1;
 
-        & > * {
-            pointer-events: all;
-        }
+            .right {
+                display: unset;
+            }
 
-        .v-fab-button {
-            margin: auto;
-        }
-    }
-
-    aside {
-        display: none;
-        padding: 16px 4px 16px 0;
-
-        @media screen and (min-width: 64em) {
-            display: block;
+            .bottom {
+                display: none;
+            }
         }
     }
 }

@@ -12,6 +12,10 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
+import {
+  BrowserAnimationsModule,
+  provideAnimations
+} from '@angular/platform-browser/animations';
 
 if (environment.production) {
   enableProdMode();
@@ -22,7 +26,7 @@ const hidden = true;
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(HttpClientModule),
+    importProvidersFrom([HttpClientModule, BrowserAnimationsModule]),
     hidden ?? environment.production
       ? provideRouter(APP_ROUTES)
       : provideRouter(APP_ROUTES, withDebugTracing()),
