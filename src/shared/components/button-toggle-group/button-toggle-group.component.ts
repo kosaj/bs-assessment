@@ -15,7 +15,7 @@ import {
   OnInit,
   Output,
   QueryList,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { buttonToggleToken, VButtonToggle } from './button-toggle.directive';
@@ -31,15 +31,15 @@ declare const ngDevMode: boolean;
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     role: 'group',
-    class: 'v-button-toggle-group',
+    class: 'v-button-toggle-group'
   },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => VButtonToggleGroup),
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class VButtonToggleGroup
   implements OnInit, AfterContentInit, ControlValueAccessor
