@@ -14,7 +14,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
           (click)="isOpen = true"
         >
           -
-        </button>
+        </button>  
 
         <ng-template
           cdkConnectedOverlay
