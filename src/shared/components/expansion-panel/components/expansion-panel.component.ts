@@ -35,22 +35,13 @@ export class VExpansionPanel implements OnDestroy {
     this._portalComponent = value;
   }
   private _portalComponent!: ComponentPortal<any>;
-  private overlayRef: OverlayRef | null = null;
-
-  get expanded(): boolean {
-    return this._expanded;
-  }
-
-  set expanded(value: boolean) {
-    this._expanded = value;
-  }
-
-  private _expanded = false;
+  private readonly overlayRef: OverlayRef;
 
   constructor(public readonly overlay: Overlay) {
     this.overlayRef = this.createOverlay({
       hasBackdrop: true,
-      backdropClass: 'cdk-overlay-dark-backdrop'
+      backdropClass: 'cdk-overlay-dark-backdrop',
+      panelClass: 'bucket-overlay'
     });
   }
 
@@ -59,12 +50,10 @@ export class VExpansionPanel implements OnDestroy {
   }
 
   close(): void {
-    this.expanded = false;
     this.overlayRef?.detach();
   }
 
   open(): void {
-    this.expanded = true;
     this.overlayRef?.attach(this._portalComponent);
 
     if (this.overlayRef?.hasAttached()) {
@@ -73,16 +62,14 @@ export class VExpansionPanel implements OnDestroy {
   }
 
   toggle(): void {
-    // this.expanded = !this.expanded;
-    this.expanded ? this.close() : this.open();
+    this.overlayRef?.hasAttached() ? this.close() : this.open();
   }
 
   private getOverlayConfig(config: OverlayConfig): OverlayConfig {
     const positionStrategy = this.overlay
       .position()
       .global()
-      .centerHorizontally()
-      .centerVertically();
+      .centerHorizontally();
 
     const overlayConfig = new OverlayConfig({
       hasBackdrop: config.hasBackdrop,
