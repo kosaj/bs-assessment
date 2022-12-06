@@ -1,32 +1,29 @@
 {
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true,
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features",
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
-    },
-    "editor.formatOnSave": false
+    }
   },
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true,
       "source.organizeImports": true
-    },
-    "editor.formatOnSave": false
+    }
   },
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features",
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
-    },
-    "editor.formatOnSave": false
+    }
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
-    },
-    "editor.formatOnSave": false
+    }
   }
 }

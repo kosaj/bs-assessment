@@ -12,16 +12,16 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
           cdkOverlayOrigin
           #originOverlay="cdkOverlayOrigin"
           (click)="isOpen = true"
-        >
+        >   
           -
         </button>  
-
+ 
         <ng-template
           cdkConnectedOverlay
           [cdkConnectedOverlayOrigin]="originOverlay"
           [cdkConnectedOverlayOpen]="isOpen"
           [cdkConnectedOverlayHasBackdrop]="true"
-          (backdropClick)="isOpen = false"
+          (backdropClick)="isOpen = false"   
         >
         <div #body role="region"
      
