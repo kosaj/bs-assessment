@@ -14,22 +14,22 @@ import {
   OnDestroy,
   ViewEncapsulation
 } from '@angular/core';
-import { VButton } from '../../button/button.component';
+import { VButton } from '@shared/components/button/button.component';
 
 @Component({
-  selector: 'v-expansion-panel',
+  selector: 'app-ticket-fixed-bucket',
+  exportAs: 'appTicketFixedBucket',
   standalone: true,
   imports: [OverlayModule, VButton],
-  template: ` <button v-fab-button (click)="toggle()">-</button> `,
-  styleUrls: ['./expansion-panel.component.scss'],
+  template: ` <ng-content select="button[v-fab-button]"></ng-content> `,
+  styleUrls: ['./ticket-fixed-bucket.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'v-expansion-panel',
-    '[class.v-expansion-panel--expanded]': 'expanded'
+    class: 'app-ticket-fixed-bucket'
   }
 })
-export class VExpansionPanel implements OnDestroy {
+export class TicketFixedBucketComponent implements OnDestroy {
   @Input()
   set componentPortal(value: ComponentPortal<any>) {
     this._portalComponent = value;

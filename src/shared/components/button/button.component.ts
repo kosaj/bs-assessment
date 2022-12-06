@@ -5,7 +5,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 
 const BUTTON_HOST_ATTRIBUTES = ['v-button', 'v-fab-button'];
@@ -22,8 +22,8 @@ const BUTTON_HOST_ATTRIBUTES = ['v-button', 'v-fab-button'];
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'v-base-button',
-  },
+    class: 'v-base-button'
+  }
 })
 export class VButton {
   constructor(private readonly _elementRef: ElementRef) {
