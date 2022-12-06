@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, withDebugTracing } from '@angular/router';
 import { BetEffects } from '@app/+state/bet/bet.effects';
 import * as fromBet from '@app/+state/bet/bet.reducer';
@@ -22,7 +23,7 @@ const hidden = true;
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(HttpClientModule),
+    importProvidersFrom([HttpClientModule, BrowserAnimationsModule]),
     hidden ?? environment.production
       ? provideRouter(APP_ROUTES)
       : provideRouter(APP_ROUTES, withDebugTracing()),
@@ -30,7 +31,7 @@ bootstrapApplication(AppComponent, {
     GetGeoipProvider,
     //NGRX
     provideStore({ bet: fromBet.reducer }),
-    provideStoreDevtools(),
-    provideEffects([BetEffects]),
-  ],
+    environment.production ? [] : provideStoreDevtools(),
+    provideEffects([BetEffects])
+  ]
 }).catch((err: any) => console.error(err));

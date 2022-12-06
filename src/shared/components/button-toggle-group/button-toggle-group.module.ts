@@ -4,6 +4,6 @@ import { VButtonToggle } from './button-toggle.directive';
 
 @NgModule({
   imports: [VButtonToggleGroup, VButtonToggle],
-  exports: [VButtonToggleGroup, VButtonToggle],
+  exports: [VButtonToggleGroup, VButtonToggle]
 })
 export class VButtonToggleGroupModule {}

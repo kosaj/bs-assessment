@@ -97,24 +97,26 @@ export class MatchRowComponent implements OnDestroy {
   }
 
   get drawDiff(): '/' | '+' | '-' {
-    return !!this.previousItem
-      ? this._previousItem!.draw - this._item.draw
+    return this.previousItem
+      ? this._previousItem && this._previousItem.draw - this._item.draw
         ? '+'
         : '-'
       : '/';
   }
 
   get firstTeamDiff(): '/' | '+' | '-' {
-    return !!this.previousItem
-      ? this._previousItem!.teams[0].win - this._item.teams[0].win
+    return this.previousItem
+      ? this._previousItem &&
+        this._previousItem.teams[0].win - this._item.teams[0].win
         ? '+'
         : '-'
       : '/';
   }
 
   get secondTeamDiff(): '/' | '+' | '-' {
-    return !!this.previousItem
-      ? this._previousItem!.teams[1].win - this._item.teams[1].win
+    return this.previousItem
+      ? this._previousItem &&
+        this._previousItem.teams[1].win - this._item.teams[1].win
         ? '+'
         : '-'
       : '/';

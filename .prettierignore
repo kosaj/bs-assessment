@@ -3,3 +3,5 @@ coverage
 e2e
 node_modules
 .angular
+package.json
+package-lock.json

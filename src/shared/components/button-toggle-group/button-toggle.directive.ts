@@ -10,7 +10,7 @@ import {
   Host,
   InjectionToken,
   Input,
-  Output,
+  Output
 } from '@angular/core';
 import { VButtonToggleGroup } from './button-toggle-group.component';
 
@@ -31,14 +31,14 @@ export class VButtonToggleChange {
     class: 'v-button-toggle',
     '[class.v-button-toggle--checked]': 'checked',
     '[class.v-button-toggle--disabled]': 'disabled',
-    '(click)': '_onButtonClick()',
+    '(click)': '_onButtonClick()'
   },
   providers: [
     {
       provide: buttonToggleToken,
-      useExisting: forwardRef(() => VButtonToggle),
-    },
-  ],
+      useExisting: forwardRef(() => VButtonToggle)
+    }
+  ]
 })
 export class VButtonToggle {
   @Output()
@@ -75,7 +75,7 @@ export class VButtonToggle {
     this._disabled = coerceBooleanProperty(value);
   }
 
-  private _disabled: boolean = false;
+  private _disabled = false;
 
   constructor(
     @Host()

@@ -6,3 +6,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - [socket.io-client](https://socket.io/docs/v3/) - its v3 but gives an overview how to use it..
 - [redux-devtools](https://github.com/reduxjs/redux-devtools/)
+
+## HUSKY
+
+- `npm run test -- --passWithNoTests` is beeing run on 'pre-commit' hook.
+
+## Issues
+
+- eslint for some reason don't want to lint .js files.. / same for json files

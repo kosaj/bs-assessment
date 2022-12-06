@@ -6,7 +6,7 @@ import { EnvironmentToken } from '@app/tokens/environment.token';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ApiService {
   private readonly _apiUrl =
@@ -58,7 +58,7 @@ export class ApiService {
    * @param {number} rate - rate is in request by second
    * @returns {Observable<void>}
    */
-  startPulling(rate: number = 0.25): Observable<void> {
+  startPulling(rate: number): Observable<void> {
     return this._httpClient.get<void>(
       `${this._apiUrl}/pulling/start?rate=${rate}`
     );
