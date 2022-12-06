@@ -31,11 +31,34 @@ import { VButton } from '../../button/button.component';
   styleUrls: ['./expansion-panel.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
+  host: {
+    class: 'v-expansion-panel',
+    '[class.v-expansion-panel--expanded]': 'expanded',
+  }
 })
 export class VExpansionPanel {
 
+   get expanded(): boolean {
+    return this._expanded;
+   }
+
+   set expanded(value: boolean) {
+    this._expanded = value;
+   }
   
-  isOpen = false;
+  private _expanded = false;
+
+  close(): void {
+    this.expanded = false;
+  }
+
+   open(): void {
+    this.expanded = true;
+  }
+
+   toggle(): void {
+    this.expanded = !this.expanded;
+  }
 }
 // [@bodyExpansion]="isOpen ? 'expanded' : 'collapsed'"
 // (@bodyExpansion.done)="_bodyAnimationDone.next($event)"
