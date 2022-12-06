@@ -30,7 +30,7 @@ import { GeoipDataService } from '@app/services/geoip-data.service';
     </div>
   `,
   styleUrls: ['./ticket-bucket.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketBucketComponent {
   get symbol(): string {

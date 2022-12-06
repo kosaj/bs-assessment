@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, withDebugTracing } from '@angular/router';
 import { BetEffects } from '@app/+state/bet/bet.effects';
 import * as fromBet from '@app/+state/bet/bet.reducer';
@@ -12,10 +13,6 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
-import {
-  BrowserAnimationsModule,
-  provideAnimations
-} from '@angular/platform-browser/animations';
 
 if (environment.production) {
   enableProdMode();

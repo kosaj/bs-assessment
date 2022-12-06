@@ -5,7 +5,7 @@ import {
   Component,
   ElementRef,
   Input,
-  OnDestroy,
+  OnDestroy
 } from '@angular/core';
 import { Bet } from '@app/models/bet.interface';
 import { VButtonToggleGroupModule } from 'src/shared/components/button-toggle-group/button-toggle-group.module';
@@ -66,7 +66,7 @@ const HINT_CALLBACK_TIME = 500;
     </v-button-toggle-group>
   `,
   styleUrls: ['./match-row.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MatchRowComponent implements OnDestroy {
   private _hintTimer: Timer | undefined;
