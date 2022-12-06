@@ -11,8 +11,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnDestroy,
-  ViewEncapsulation
+  OnDestroy
 } from '@angular/core';
 import { VButton } from '@shared/components/button/button.component';
 
@@ -23,11 +22,7 @@ import { VButton } from '@shared/components/button/button.component';
   imports: [OverlayModule, VButton],
   template: ` <ng-content select="button[v-fab-button]"></ng-content> `,
   styleUrls: ['./ticket-fixed-bucket.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'app-ticket-fixed-bucket'
-  }
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TicketFixedBucketComponent implements OnDestroy {
   @Input()
